@@ -12,9 +12,9 @@
 )
 
 (defun my-finder (item list)
-	(if (eq item (car list))
-		(car list)
-		(my-finder item (cdr list))	
+	(cond ((eq list ()) NIL)
+	      ((eq item (car list)) (car list))
+	      (t (my-finder item (cdr list)))
 	)
 )
 
