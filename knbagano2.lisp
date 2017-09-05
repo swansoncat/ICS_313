@@ -12,7 +12,9 @@
 )
 
 (defun my-finder (item list)
-	(cond ((eq list ()) NIL)
+	(cond ((eq NIL (typep item 'integer)) (print "Error: You input a non integer value for a parameter"))
+	      ((eq NIL (typep list 'list)) (print "Error: You input a non integer value for a parameter"))
+	      ((eq list ()) NIL)
 	      ((eq item (car list)) (car list))
 	      (t (my-finder item (cdr list)))
 	)
