@@ -2,9 +2,12 @@
 (defparameter +ID+ "Kalen Bagano")
 
 (defun ID (course assignment)
-	(print (concatenate 'string "Name: " +ID+))
-	(print (concatenate 'string "Course: ICS " (write-to-string course)))
-	(print (concatenate 'string "Assignment #: " (write-to-string assignment)))
+	(if (and (typep course 'integer) (typep assignment 'integer))
+		(progn
+			(print (concatenate 'string "Name: " +ID+))
+			(print (concatenate 'string "Course: ICS " (write-to-string course)))
+			(print (concatenate 'string "Assignment #: " (write-to-string assignment))))
+		(print "Error: one of your input was not an integer"))
 	nil
 )
 
