@@ -11,6 +11,30 @@
 	nil
 )
 
+(defun my-finder (item list)
+	(if (eq item (car list))
+		(print (write-to-string item))
+		(my-finder (item (cdr list)))	
+	)
+)
+
+
+(defun fibo (number)
+	(if (> number 1)
+		(* number (fibo (- number 1)))
+		1
+	)
+)
+	
+
+(defun recurse (list)
+	(print (car list))
+	(if (eq '() (cdr list))
+		NIL
+		(recurse (cdr list))
+	)
+)
+
 (defun testif (word)
 	(if (parse-integer word :junk-allowed t)
 		(print "Input was integer")
