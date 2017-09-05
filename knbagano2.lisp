@@ -13,8 +13,8 @@
 
 (defun my-finder (item list)
 	(if (eq item (car list))
-		(print (write-to-string item))
-		(my-finder (item (cdr list)))	
+		(car list)
+		(my-finder item (cdr list))	
 	)
 )
 
