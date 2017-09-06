@@ -34,7 +34,12 @@
 	)
 )
 
-
+(defun matchp (item-one item-two)
+	(cond ((and (equal item-one item-two) (typep item-one 'list)) (cons (car item-one) (cdr item-one)))
+	      ((equal item-one item-two) item-one)
+	      (t (print "No match") NIL)
+	)
+)
 
 
 (defun fibo (number)
