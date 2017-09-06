@@ -51,6 +51,10 @@
 	)
 )
 
+;;;The function matchp checks whether or not two given parameters are equal. There is no error checking built into the input as technically the user could input anything and the REPL automatically
+;;;gives error notification is the user tries to put in more or less parameters than is required.
+;;;The function works first by checking if the parameters given are lists and if they are equal and if both are true then the function returns the first list. For all other data types the
+;;;functions checks if they are equal and returns the first item if they are. Lastly the function returns NIL if the parameters are equal.
 (defun matchp (item-one item-two)
 	(cond ((and (equal item-one item-two) (typep item-one 'list)) (cons (car item-one) (cdr item-one)))
 	      ((equal item-one item-two) item-one)
