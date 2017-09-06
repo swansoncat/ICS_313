@@ -1,6 +1,11 @@
+;;;;This lisp file contains the functions for assignment 2.
 
-(defparameter +ID+ "Kalen Bagano")
+(defparameter +ID+ "Kalen Bagano") ;The variable +ID+ contains my name
 
+;;;The function ID() takes two integers as parameters, one for the course number and one for the assignment number. It prints an error message if the user inputs anything that isn't an
+;;;integer.
+;;;
+;;;The function works by printing to the terminal preset sentences that are concatenated to the users input which has been transformed from integers into strings.
 (defun ID (course assignment)
 	(if (and (typep course 'integer) (typep assignment 'integer))
 		(progn
@@ -11,6 +16,10 @@
 	nil
 )
 
+;;;The function my-finder takes two parameters, an integer to be searched for and a list to be searched in. It prints an error message if the user inputs something that isn't an integer
+;;;or something that isn't a list into the first and second parameters respectively. It returns the item if it is found in the list, and NIL otherwise.
+;;;
+;;;The function works by checking if the head of the list is equal to the item, and if it isn't, the function is called again recursively on the remainder of the list.
 (defun my-finder (item list)
 	(cond ((equal NIL (typep item 'integer)) (print "Error: You input a non integer value for a parameter"))
 	      ((equal NIL (typep list 'list)) (print "Error: You input a non integer value for a parameter"))
@@ -20,8 +29,10 @@
 	)
 )
 
+;;;The function eat-last takes a list as a parameter.
 (defun eat-last (list)
-	(cond ((equal NIL list) NIL)
+	(cond ((eq NIL (typep list 'list)) (print "Error: You passed something that isn't a list as the parameter"))
+	      ((equal NIL list) NIL)
 	      ((equal NIL (cdr list)) NIL)
 	      (t (cons (car list) (eat-last (cdr list))))
 	)     
