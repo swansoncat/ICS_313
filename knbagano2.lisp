@@ -20,19 +20,22 @@
 	)
 )
 
-(defun eat-last-test (list)
-	(unless (equal NIl (cdr list))
-		(cons (car list) (eat-last (cdr list)))
-		(cons list NIL)	
-	)
-)
-
 (defun eat-last (list)
 	(cond ((equal NIL list) NIL)
 	      ((equal NIL (cdr list)) NIL)
 	      (t (cons (car list) (eat-last (cdr list))))
 	)     
 )
+
+(defun symbols-only (list)
+	(cond ((equal NIL list) NIL)
+	      ((symbolp (car list)) (cons (car list) (symbols-only (cdr list))))
+	      ((equal NIL (symbolp (car list))) (symbols-only (cdr list)))
+	)
+)
+
+
+
 
 (defun fibo (number)
 	(if (> number 1)
