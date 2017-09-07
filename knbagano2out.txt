@@ -1,0 +1,135 @@
+Script started on Wed 06 Sep 2017 11:21:04 PM HST
+]0;gary@gary-VirtualBox: /media/sf_VBoxSharedFolder/ICS_313gary@gary-VirtualBox:/media/sf_VBoxSharedFolder/ICS_313$ clisp
+  i i i i i i i       ooooo    o        ooooooo   ooooo   ooooo
+  I I I I I I I      8     8   8           8     8     o  8    8
+  I  \ `+' /  I      8         8           8     8        8    8
+   \  `-+-'  /       8         8           8      ooooo   8oooo
+    `-__|__-'        8         8           8           8  8
+        |            8     o   8           8     o     8  8
+  ------+------       ooooo    8oooooo  ooo8ooo   ooooo   8
+
+Welcome to GNU CLISP 2.49 (2010-07-07) <http://clisp.cons.org/>
+
+Copyright (c) Bruno Haible, Michael Stoll 1992, 1993
+Copyright (c) Bruno Haible, Marcus Daniels 1994-1997
+Copyright (c) Bruno Haible, Pierpaolo Bernardi, Sam Steingold 1998
+Copyright (c) Bruno Haible, Sam Steingold 1999-2000
+Copyright (c) Sam Steingold, Bruno Haible 2001-2010
+
+Type :h and hit Enter for context help.
+
+[1]> (load "knbagano2.lisp")[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C
+;; Loading file knbagano2.lisp ...
+;; Loaded file knbagano2.lisp
+T
+[2]> (id 1[K313 2)[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C
+
+"Name: Kalen Bagano" 
+"Course: ICS 313" 
+"Assignment #: 2" 
+NIL
+[3]> (id 'foo 2)[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C
+
+"Error: one of your input was not an integer" 
+NIL
+[4]> (id 313 'foo)[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C
+
+"Error: one of your input was not an integer" 
+NIL
+[5]> (id 1( 12[K[K[K[K[K'(1 2 3)[C[C[C[C[C[C[C 2)[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C
+
+"Error: one of your input was not an integer" 
+NIL
+[6]> (id 313 '(1 2 3)[C[C[C[C[C[C[C)[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C
+
+"Error: one of your input was not an integer" 
+NIL
+[7]> (my0[K-finder 8 '(8)[C[C[C)[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C
+8
+[8]> (my-finder 8 "foo")[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C
+
+"Error: You input a non integer value for a parameter" 
+"Error: You input a non integer value for a parameter"
+[9]> (my-finder 'kalen '(1 2 3)[C[C[C[C[C[C[C)[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C
+
+"Error: You input a non integer value for a parameter" 
+"Error: You input a non integer value for a parameter"
+[10]> (my-finder 8 ()[C[C)[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C
+NIL
+[11]> (my-finder 1 '(5 4 3 2 1)[C[C[C[C[C[C[C[C[C[C[C)[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C
+1
+[12]> (my-finder 1 '(6 5 3 2 1)[C[C[C[C[C[C[C[C[C[C[C)[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C
+1
+[13]> (mt [K[Ky finder 1 '(6 5 4 3 2)[C[C[C[C[C[C[C[C[C[C[C)[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C
+
+*** - EVAL: undefined function MY
+The following restarts are available:
+USE-VALUE      :R1      Input a value to be used instead of (FDEFINITION 'MY).
+RETRY          :R2      Retry
+STORE-VALUE    :R3      Input a new value for (FDEFINITION 'MY).
+ABORT          :R4      Abort main loop
+Break 1 [14]> AO[KBORT
+[15]> (my-finder 1 '( 6 5 [K[K[K[K[K6 5 4 3 2)[C[C[C[C[C[C[C[C[C[C[C)[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C
+NIL
+[16]> (eat-lst [K[K[Kast '( 8 9 10 3)[C[C[C[C[C[C[C[C[C[C[C)[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C
+(8 9 10)
+[17]> (eat-last '(1)[C[C[C)[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C
+NIL
+[18]> (eat-last ()[C[C)[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C
+NIL
+[19]> (eat-last 1)[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C
+
+"Error: You passed something that isn't a list as the parameter" 
+"Error: You passed something that isn't a list as the parameter"
+[20]> (eat-last 1)[K[K'foo)[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C
+
+"Error: You passed something that isn't a list as the parameter" 
+"Error: You passed something that isn't a list as the parameter"
+[21]> (eat-last 'foo)[K[K[K[K[K"foo")[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C
+
+"Error: You passed something that isn't a list as the parameter" 
+"Error: You passed something that isn't a list as the parameter"
+[22]> (eat-last "foo")[K[K[K[K[K[K'(kalen 1 2 manoa 4 ()[C[C 5 6)[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C)[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C
+(KALEN 1 2 MANOA 4 NIL 5)
+[23]> (eat-last (list 'Hello 'World)[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C)[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C
+(HELLO)
+[24]> (symbols-only '(1 "two" (list 3 4([K)[C[C[C[C[C[C[C[C[C[C)[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C)[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C
+NIL
+[25]> (symbols-only (list 'foo 'bar ()[C[C)[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C)[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C
+(FOO BAR NIL)
+[26]> (symbols-only (list 1 "foo" 'fie 'fo "fum: 99)[K[K[K[K[K" 99)[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C)[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C
+(FIE FO)
+[27]> (symbols-only ()[C[C)[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C
+NIL
+[28]> (symbols-only ())[K[K[K"foo")[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C
+
+"Error: You passed something that isn't a list as the parameter" 
+"Error: You passed something that isn't a list as the parameter"
+[29]> (symbols-only "foo")[K[K[K[K[K[K1)[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C
+
+"Error: You passed something that isn't a list as the parameter" 
+"Error: You passed something that isn't a list as the parameter"
+[30]> (symbols-only 1)[K[K(list 'Kalen ()[C[C 'Hello ()[C[C 1 2 'World ()[C[C)[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C)[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C
+(KALEN NIL HELLO NIL WORLD NIL)
+[31]> (matchp 9 "9")[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C
+
+"No match" 
+NIL
+[32]> (matchp 'foo[K[K[K[K([K'(foo bar)[C[C[C[C[C[C[C[C[C (list 'foo 'bar)[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C)[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C
+(FOO BAR)
+[33]> (matchp (list 313 "argument[K[K[K[K[K[K[Kssignment" 2)[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C '(313 "assignment" 2)[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C)[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C
+(313 "assignment" 2)
+[34]> (matchp 'foo "foo")[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C
+
+"No match" 
+NIL
+[35]> (matchp 'foo "foo")[K[K[K[K[K[K'foo)[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C
+FOO
+[36]> (matchp 'foo 'foo)[K[K[K[K[K[K[K[K[K[K'( 1 2[K[K[K[K1 2)[C[C[C[C[C (cons 1 ( cons[K[K[K[K[Kcons 2 ()[C[C)[C[C[C[C[C[C[C[C[C[C[C)[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C)[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C
+(1 2)
+[37]> (matchp '(1 2) (cons 1 (cons 2 ())))[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K(list 1 2)[C[C[C[C[C[C[C[C[C[C (cons 1 (cons 2 ()[C[C)[C[C[C[C[C[C[C[C[C[C[C)[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C)[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C
+(1 2)
+[38]> (quit)[C[C[C[C[C[C
+Bye.
+]0;gary@gary-VirtualBox: /media/sf_VBoxSharedFolder/ICS_313gary@gary-VirtualBox:/media/sf_VBoxSharedFolder/ICS_313$ exit
+Script done on Wed 06 Sep 2017 11:29:54 PM HST
