@@ -21,3 +21,16 @@
 		(t (+ (fibonacciR (- number 1)) (fibonacciR (- number 2))))
 	)
 )
+
+(defun gcdR (number1 number2)
+	(cond
+		((not (typep number1 'integer)) (print "Error: You entered a non integer value as a parameter"))
+		((not (typep number2 'integer)) (print "Error: You entered a non integer value as a parameter"))
+		((= number1 0) number1)
+		((= number2 0) number2)
+		((= (mod number1 number2) 0) number2)
+		((= (mod number2 number1) 0) number1)
+		((> number1 number2) (multiple-value-bind (q r) (floor number1 number2) (gcdR number2 r)))
+		(t (multiple-value-bind (q r) (floor number2 number1) (gcdR number1 r)))
+	) 
+)
