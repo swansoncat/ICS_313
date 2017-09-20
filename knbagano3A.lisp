@@ -29,7 +29,9 @@
 		((and (not (typep number3 'integer)) (not (eq number3 NIL))) (print "Error: You entered a non integer value as a parameter"))
 		((= number1 0) number1)
 		((= number2 0) number2)
+		;;Note to self: ((= number3 0) number3) like for the prior two lines doesn't work because = only compares numbers
 		((equal number3 0) number3)
+		((typep number3 'integer) (let ((firstgcd (gcdR number1 number2)) (secondgcd (gcdR number2 number3))) (gcdR firstgcd secondgcd)))
 		((= (mod number1 number2) 0) number2)
 		((= (mod number2 number1) 0) number1)
 		((> number1 number2) (multiple-value-bind (q r) (floor number1 number2) (gcdR number2 r)))
