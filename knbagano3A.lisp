@@ -48,7 +48,12 @@
 		((= number2 0) (cond ((equal number3 NIL) number1) ((> number1 number3) number1) (t number3)))
 		;;Note to self: ((= number3 0) number3) like for the prior two lines doesn't work because = only compares numbers
 		((equal number3 0) (if (> number2 number1) number2 number1))
-		;;insert function for third gcd here
+		;;The variable 's' is the quotient which is thrown away every loop
+		((typep number3 'integer) (let ((firstgcd number1) (r number2) (finalgcd number3)) 
+										(loop while (> r 0) do (multiple-value-bind (s u) (floor firstgcd r) (setf firstgcd r) (setf r u)))
+										(setf r firstgcd)
+								    	(loop while (> r 0) do (multiple-value-bind (s u) (floor finalgcd r) (setf finalgcd r) (setf r u)))
+										finalgcd))
 		((= (mod number1 number2) 0) number2)
 		((= (mod number2 number1) 0) number1)	
 		((> number1 number2) (let ((q number1) (r number2)) (loop while (> r 0) do (multiple-value-bind (s u) (floor q r) (setf q r) (setf r u))) q))		
