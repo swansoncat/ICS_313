@@ -61,6 +61,21 @@
 	)
 )
 
+(defun lcmR (number1 number2 &optional number3)
+	(cond
+		((not (typep number1 'integer)) (print "Error: You entered a non integer value as a parameter"))
+		((not (typep number2 'integer)) (print "Error: You entered a non integer value as a parameter"))
+		((and (not (typep number3 'integer)) (not (eq number3 NIL))) (print "Error: You entered a non integer value as a parameter"))
+		((= number1 0) 0)
+		((= number2 0) 0)
+		((equal number3 0) 0)
+		((typep number3 'integer) (let ((gcd (gcdR number1 number2 number3))) (/ (* number1 number2 number3) gcd)))
+		(t (let ((gcd (gcdR number1 number2))) (/ (* number1 number2) gcd)))
+	) 
+)
+
+
+
 
 (defun opt (one &optional two)
 	(if (eq two NIL)
