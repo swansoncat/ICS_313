@@ -27,10 +27,10 @@
 		((not (typep number1 'integer)) (print "Error: You entered a non integer value as a parameter"))
 		((not (typep number2 'integer)) (print "Error: You entered a non integer value as a parameter"))
 		((and (not (typep number3 'integer)) (not (eq number3 NIL))) (print "Error: You entered a non integer value as a parameter"))
-		((= number1 0) number1)
-		((= number2 0) number2)
+		((= number1 0) (cond ((equal number3 NIL) number2) ((> number2 number3) number2) (t number3)))
+		((= number2 0) (cond ((equal number3 NIL) number1) ((> number1 number3) number1) (t number3)))
 		;;Note to self: ((= number3 0) number3) like for the prior two lines doesn't work because = only compares numbers
-		((equal number3 0) number3)
+		((equal number3 0) (if (> number2 number1) number2 number1))
 		((typep number3 'integer) (let ((firstgcd (gcdR number1 number2)) (secondgcd (gcdR number2 number3))) (gcdR firstgcd secondgcd)))
 		((= (mod number1 number2) 0) number2)
 		((= (mod number2 number1) 0) number1)
@@ -39,7 +39,22 @@
 	) 
 )
 
-
+(defun gcdi (number1 number2 &optional number3)
+	(cond
+		((not (typep number1 'integer)) (print "Error: You entered a non integer value as a parameter"))
+		((not (typep number2 'integer)) (print "Error: You entered a non integer value as a parameter"))
+		((and (not (typep number3 'integer)) (not (eq number3 NIL))) (print "Error: You entered a non integer value as a parameter"))
+		((= number1 0) (cond ((equal number3 NIL) number2) ((> number2 number3) number2) (t number3)))
+		((= number2 0) (cond ((equal number3 NIL) number1) ((> number1 number3) number1) (t number3)))
+		;;Note to self: ((= number3 0) number3) like for the prior two lines doesn't work because = only compares numbers
+		((equal number3 0) (if (> number2 number1) number2 number1))
+		;;insert function for third gcd here
+		((= (mod number1 number2) 0) number2)
+		((= (mod number2 number1) 0) number1)	
+		((> number1 number2) (let ((q number1) (r number2)) (loop while (> r 0) do (multiple-value-bind (s u) (floor q r) (setf q r) (setf r u))) q))		
+		(t (let ((q number2) (r number1)) (loop while (> r 0) do (multiple-value-bind (s u) (floor q r) (setf q r) (setf r u))) q))
+	)
+)
 
 
 (defun opt (one &optional two)
