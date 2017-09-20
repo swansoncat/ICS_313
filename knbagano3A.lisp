@@ -97,8 +97,16 @@
 	)
 )
 
-(defun remove-numbers-i (number1 number2 &optional number3)
-
+(defun remove-numbers-i (l)
+	(cond
+		((not (typep l 'list)) (print "Error: You entered a parameter that wasn't a list"))
+		((equal NIL l) NIL)
+		(t (let ((i 0) (a l) (b ())) (loop while (< i (list-length l)) do (if (not (typep (car a) 'integer)) (setf b (cons (car a) b)) (setf b b)) do (setf a (cdr a)) do (setf i (1+ i)) )
+									 (setf a ())
+									 (setf i (list-length b))
+									 (loop while (> i 0) do (setf a (cons (car b) a)) do (setf b (cdr b)) do (setf i (1- i)))a)
+		)
+	)
 )
 
 (defun opt (one &optional two)
@@ -106,4 +114,15 @@
 		one
 		(+ one two)
 	)
+)
+
+;;;Used this function to prove that there will be an issue with the remove numbers iteratively if you have a list that contains nils
+(defun testendoflist (l)
+	(let ((a l)) (loop while (not (equal (car a) nil)) do (print (car a)) do (setf a (cdr a))))
+
+)
+
+
+(defun k (l)
+	(let ((i 0) (a l)) (loop while (< i (list-length l)) do (print (car a)) do (setf i (1+ i)) do (setf a (cdr a))))
 )
