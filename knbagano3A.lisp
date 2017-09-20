@@ -87,6 +87,19 @@
 	) 
 )
 
+(defun remove-numbers-r (l)
+	(cond
+		((not (typep l 'list)) (print "Error: You entered a parameter that wasn't a list"))
+		((equal NIL l) NIL)
+		((typep (car l) 'list)  (cons (remove-numbers-r (car l)) (remove-numbers-r (cdr l))))
+		((typep (car l) 'number) (remove-numbers-r (cdr l) ))
+		(t (cons (car l) (remove-numbers-r (cdr l))))
+	)
+)
+
+(defun remove-numbers-i (number1 number2 &optional number3)
+
+)
 
 (defun opt (one &optional two)
 	(if (eq two NIL)
