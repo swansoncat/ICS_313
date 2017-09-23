@@ -156,7 +156,7 @@
 									))
 								  ;;below is for lists
 								 (t (print 'list)
-									(setf listlengths (cons (list-length (car temp)) listlengths)) 
+									(if (eq (car temp) nil) 'donothing (setf listlengths (cons (list-length (car temp)) listlengths))) 
 									(setf list-depth (1+ list-depth))
 									(setf flip (1+ flip))
 									
