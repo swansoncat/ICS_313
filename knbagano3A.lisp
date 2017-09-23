@@ -109,6 +109,54 @@
 	)
 )
 
+;;new idea for iteratively removing numbers. Move through list looking for lists, modify list, then go back up.
+;;;Also could try doing something like break lists into individuals parts and reindex after having everything in
+(defun rni (l)
+;;The variable lists will holds the length of each list in the depth chain of lists
+	(let ((x l) (y ()) (i 0) (list-depth 0) (listlengths (list 0)) (temp ()) (temp2 ()))
+		(loop while (< i (list-length l)) do (setf i (1+ i)) do
+			(cond
+				((and (not (typep (car x) 'number)) (not (typep (car x) 'list))) (setf y (cons (car x) y)) (setf x (cdr x)) (print 'firststatement) (print x))
+				((typep (car x) 'number) (setf x (cdr x)))
+				;;below originall said (typep (car x) 'list) instead of t
+				(t (setf temp (car x)) (print temp) (print (car temp)) (setf list-depth (1+ list-depth)) (setf listlengths (cons (list-length (car x)) listlengths)) 
+					(loop while (and (> list-depth 0) (> (car listlengths) 0))  
+						do (cond ((and (not (typep (car temp) 'number)) (not (typep (car temp) 'list))) 
+									(cons (car temp) temp2) 
+									(setf temp (cdr temp)) 
+									(setf (car listlengths) (1- (car listlengths))) 
+									(cond ((= (car listlengths) 0) 
+											(setf listlengths (cdr listlengths)) 
+											(setf temp (cdr temp)) 
+											(setf temp2 (cdr temp2)))
+										  (t 'nothing)))
+								 ((typep (car temp) 'number) 
+									(setf temp (cdr temp)) 
+									(setf (car listlengths) (1- (car listlengths))) 
+									(cond ((= (car listlengths) 0) 
+											(setf listlengths (cdr listlengths)) 
+											(setf temp (cdr temp)) 
+											(setf temp2 (cdr temp2)))
+										  (t 'nothing)
+									))
+								  ;;below is for lists
+								 (t 
+									(cons (list-length (car temp)) listlengths) 
+									(cons (car temp) temp)
+									(setf (car listlengths) (1- (car listlengths)))
+									(cond ((= (car listlengths) 0) 
+											(setf listlengths (cdr listlengths)) 
+											(setf temp (cdr temp)) 
+											(setf temp2 (cdr temp2)))
+										  (t 'nothing)
+									))) 
+							) (setf y (cons temp2 y)) (setf x (cdr x))
+				)
+			) 
+		) y
+	)																
+)
+
 (defun opt (one &optional two)
 	(if (eq two NIL)
 		one
