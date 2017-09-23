@@ -118,8 +118,8 @@
 			(cond
 				((and (not (typep (car x) 'number)) (not (typep (car x) 'list))) (setf y (cons (car x) y)) (setf x (cdr x)))
 				((typep (car x) 'number) (setf x (cdr x)))
-				;;below originall said (typep (car x) 'list) instead of t
-				(t (setf temp (car x)) (setf list-depth (1+ list-depth)) (setf listlengths (cons (list-length (car x)) listlengths)) 
+				;;if we get list, then next block looks at first item on list
+				(t (setf temp (car x)) (setf list-depth (1+ list-depth)) (setf listlengths (cons (list-length (car x)) listlengths))  
 					(loop while (and (> list-depth 0) (> (car listlengths) 0))  
 						do (cond ((and (not (typep (car temp) 'number)) (not (typep (car temp) 'list))) 
 									(setf temp2 (cons (car temp) temp2))
@@ -139,15 +139,19 @@
 									))
 								  ;;below is for lists
 								 (t 
-									(cons (list-length (car temp)) listlengths)
-									(setf temp2 (cons (car temp) temp2))
-									(setf temp (cons (car temp) temp))
+									(setf listlengths (cons (list-length (car temp)) listlengths)) (print (list-length (car temp))) (print listlengths)
+									(setf list-depth (1+ list-depth))
+									
+									(print temp) (print (car temp)) (print (caar temp))
+
+									(setf temp2 (cons (cons (caar temp) ()) temp2))
+									(setf temp (cdar temp))
 									(setf (car listlengths) (1- (car listlengths)))
 									(cond ((= (car listlengths) 0) 
 											(setf listlengths (cdr listlengths)) 
 											(setf temp (cdr temp)))
 										  (t 'nothing)
-									))) do (print temp2) 
+									)  )) 
 							) (setf y (cons temp2 y)) (setf x (cdr x)) (setf temp2 ())
 				)
 			) 
