@@ -139,8 +139,9 @@
 									))
 								  ;;below is for lists
 								 (t 
-									(cons (list-length (car temp)) listlengths) 
-									(cons (car temp) temp)
+									(cons (list-length (car temp)) listlengths)
+									(setf temp2 (cons (car temp) temp2))
+									(setf temp (cons (car temp) temp))
 									(setf (car listlengths) (1- (car listlengths)))
 									(cond ((= (car listlengths) 0) 
 											(setf listlengths (cdr listlengths)) 
