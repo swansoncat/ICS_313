@@ -147,7 +147,7 @@
 											(setf temp (cdr temp)))
 										  (t 'nothing)
 									))) do (print temp2) 
-							) (setf y (cons temp2 y)) (setf x (cdr x))
+							) (setf y (cons temp2 y)) (setf x (cdr x)) (setf temp2 ())
 				)
 			) 
 		) y
