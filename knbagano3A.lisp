@@ -22,6 +22,7 @@
 	)
 )
 
+;;;This function recursively finds the greatest common denominator of 2 or 3 numbers using Euclid's algorithm and by feed the results of Euclid's algorithm back into the function.
 (defun gcdR (number1 number2 &optional number3)
 	(cond
 		((not (typep number1 'integer)) (print "Error: You entered a non integer value as a parameter"))
@@ -39,6 +40,7 @@
 	) 
 )
 
+;;;This function iteratively finds the greatest common denominator of 2 or 3 numbers by using Euclid's algorithm in a loop and holding the results in variables that put are back into that loop.
 (defun gcdi (number1 number2 &optional number3)
 	(cond
 		((not (typep number1 'integer)) (print "Error: You entered a non integer value as a parameter"))
@@ -61,6 +63,8 @@
 	)
 )
 
+;;;This function recursively finds the least common multiple of two or three numbers recursively using the recursive greatest common denominator function. Least Common multiple is
+;;;the product of all the numbers divided by the greatest common denominator so the only part that can be done recursively really is getting the greatest common denominator.
 (defun lcmR (number1 number2 &optional number3)
 	(cond
 		((not (typep number1 'integer)) (print "Error: You entered a non integer value as a parameter"))
@@ -74,6 +78,9 @@
 	) 
 )
 
+;;;This function finds the least common multiple of two numbers iteratively by using the iterative greatest common denominator function. Again, the least common multiple is the
+;;;product of all the numbers divided by the greatest common denominator, so the bulk of the work in calculating the least common multiple is in finding the greatest common
+;;;denominator.
 (defun lcmI (number1 number2 &optional number3)
 	(cond
 		((not (typep number1 'integer)) (print "Error: You entered a non integer value as a parameter"))
@@ -87,6 +94,9 @@
 	) 
 )
 
+;;;This functions recursively removes from a list all numbers in it and that are in any lists within itself. This is done by the function calling itself recursively whenever it comes across a list.
+;;;The function works by returning a cons of either the head of the light + the function called on the remainder if the head is not a number, or by returning the function call on the remainder of the
+;;;list if the head is a number.
 (defun remove-numbers-r (l)
 	(cond
 		((not (typep l 'list)) (print "Error: You entered a parameter that wasn't a list"))
@@ -97,6 +107,9 @@
 	)
 )
 
+;;;This function iteratively removes the numbers from a list by using a loop to check the head of the list and adding it to a empty list 'b' if its not a number. When the entire list has been checked
+;;;the function loops over the new list and adds the head of the new list to the now empty list 'a', and the new list is set the to cdr of itself and the goes through the loop again. This does not work
+;;;with lists in the list. The following function was my attempt to make one to do lists in a list.
 (defun remove-numbers-i (l)
 	(cond
 		((not (typep l 'list)) (print "Error: You entered a parameter that wasn't a list"))
@@ -109,20 +122,22 @@
 	)
 )
 
-;;new idea for iteratively removing numbers. Move through list looking for lists, modify list, then go back up.
-;;;Also could try doing something like break lists into individuals parts and reindex after having everything in
+;;;This function iteratively removes the numbers from a list and list inside of the list. It works except that it places the objects in the reverse order that they were in the original list.
+;;;This got so long and complicated I'm not really sure how to describe how it works, but it does. 
+;;;
+;;;For list in a list in the main list, the inner list will be in wrong order. If there is more than one list inside of the list there will be an error.
 (defun rni (l)
 ;;The variable lists will holds the length of each list in the depth chain of lists
-	(let ((x l) (y ()) (i 0) (list-depth 0) (listlengths (list 0)) (temp ()) (temp2 ()) (flip 0))
+	(let ((x l) (y ()) (a ()) (i 0) (list-depth 0) (listlengths (list 0)) (temp ()) (temp2 ()) (flip 0))
 		(loop while (< i (list-length l)) do (setf i (1+ i)) do
 			(cond
-				((and (not (typep (car x) 'number)) (not (typep (car x) 'list))) (setf y (cons (car x) y)) (setf x (cdr x)))
-				((typep (car x) 'number) (setf x (cdr x)))
+				((or(and (not (typep (car x) 'number)) (not (typep (car x) 'list))) (eq (car x) nil)) (setf y (cons (car x) y)) (setf x (cdr x)) (print temp2))
+				((typep (car x) 'number) (setf x (cdr x)) (print temp2)) 
 				;;if we get list, then next block looks at first item on list
 				(t (setf temp (car x)) (setf list-depth (1+ list-depth)) (setf listlengths (cons (list-length (car x)) listlengths))  
-					(loop while (and (> list-depth 0) (> (car listlengths) 0))  
-						do (cond ((and (not (typep (car temp) 'number)) (not (typep (car temp) 'list)) (= flip 0)) (print 'other) 
-									(setf temp2 (cons (car temp) temp2)) (print list-depth) (print listlengths)
+					(loop while (and (> list-depth 0) (> (car listlengths) 0)) 
+						do (cond ((and (not (typep (car temp) 'number)) (not (typep (car temp) 'list)) (= flip 0)) 
+									(setf temp2 (cons (car temp) temp2)) 
 									(setf temp (cdr temp)) 
 									(setf (car listlengths) (1- (car listlengths))) 
 									(cond ((= (car listlengths) 0) 
@@ -132,8 +147,8 @@
 											(setf flip (1+ flip))
 											(setf temp (cdr temp)) )
 										  (t 'nothing)))
-								((and (not (typep (car temp) 'number)) (not (typep (car temp) 'list))) (print 'otherflip)
-									(setf temp2 (cons (cons (car temp) (car temp2)) (cdr temp2))) (print list-depth) (print listlengths)
+								((and (not (typep (car temp) 'number)) (not (typep (car temp) 'list)))
+									(setf temp2 (cons (cons (car temp) (car temp2)) (cdr temp2))) 
 									(setf temp (cdr temp)) 
 									(setf (car listlengths) (1- (car listlengths))) 
 									(cond ((= (car listlengths) 0) 
@@ -144,7 +159,7 @@
 											(setf temp (cdr temp)) )
 										  (t 'nothing)))		  
 										  
-								 ((typep (car temp) 'number) (print 'number) (print list-depth) (print listlengths)
+								 ((typep (car temp) 'number) 
 									(setf temp (cdr temp)) 
 									(setf (car listlengths) (1- (car listlengths))) 
 									(cond ((= (car listlengths) 0) 
@@ -155,14 +170,10 @@
 										  (t 'nothing)
 									))
 								  ;;below is for lists
-								 (t (print 'list)
-									(if (eq (car temp) nil) 'donothing (setf listlengths (cons (list-length (car temp)) listlengths))) 
+								 (t (if (eq (car temp) nil) 'donothing (setf listlengths (cons (list-length (car temp)) listlengths))) 
 									(setf list-depth (1+ list-depth))
 									(setf flip (1+ flip))
-									
-									;(print temp) (print (car temp)) (print (caar temp))
-
-									(setf temp2 (cons (cons (caar temp) ()) temp2)) (print list-depth) (print listlengths)
+									(setf temp2 (cons (cons (caar temp) ()) temp2)) 
 									(setf temp (cdar temp))
 									(setf (car listlengths) (1- (car listlengths)))
 									(cond ((= (car listlengths) 0) 
@@ -173,13 +184,53 @@
 											(setf temp (cdr temp)))
 										  (t 'nothing)
 									)  )) 
-							)  (setf x (cdr x)) (setf y (cons temp2 y))
-				) (setf temp2 ())
-			) 
-		) y
+							)  (setf x (cdr x)) (setf y (cons temp2 y)) (setf temp2 ()) (setf temp2 (cdr temp2)) (setf flip 0)
+				) 
+			) (setf temp2 (cdr temp2)) (setf list-depth 0) (setf listlengths (list 0)) (setf flip 0)
+		) (setf i (list-length y)) (setf temp y) (setf temp2 ()) (setf flip 0) (setf x y)
+		  (setf listlengths (list 0)) 
+		  (print 'yhere) (print y)
+		  (loop while (> i 0) do (cond ((and (not (typep (car x) 'list)) (= flip 0) ) 'normal
+											(setf a (cons (car x) a))
+											(setf temp (cdr temp))
+											(setf x (cdr x))
+											(setf i (1- i))
+										)
+										((and (eq (car x) NIL) (= flip 0))
+											(setf a (cons (car x) a))
+											(setf temp (cdr temp))
+											(setf x (cdr x))
+											(setf i (1- i))											
+										)
+										((OR (and (not (typep (car temp) 'list)) (> flip 0)) (and (> flip 0) (eq (car temp) nil))) 
+											(setf temp2 (cons (car temp) temp2)) 
+											(setf temp (cdr temp))
+											(setf (car listlengths) (1- (car listlengths))) 
+											(cond ((<= (car listlengths) 0) 
+														(setf listlengths (cdr listlengths))
+														(setf (car listlengths) (1- (car listlengths)))
+														(setf flip (1- flip))												
+														(setf temp (cdr x)) 
+														(setf x (cdr x))
+														(if (<= flip 0) (setf a (cons temp2 a)) 'donothing)
+														(if (<= flip 0) (setf temp2 ()) 'donothing))
+													(t 'nothing))
+											)
+										(t  (setf (car listlengths) (1- (car listlengths)))
+											(setf listlengths (cons (list-length (car temp)) listlengths))	
+											(setf (car listlengths) (1- (car listlengths)))
+											(if (typep (caar temp) 'list) (setf temp2 (cons (cons (caar temp) ()) temp2 )) (setf temp2 (cons (caar temp) temp2))) 
+											(setf temp (cdar temp))
+											(if (= flip 0) (setf i (1- i)))
+											(setf flip (1+ flip))											
+										))
+									) a
 	)																
 )
 
+
+
+;;;;Below functions are things not part of the homework that were made to try and test how things work while creating the other functions.
 (defun opt (one &optional two)
 	(if (eq two NIL)
 		one
