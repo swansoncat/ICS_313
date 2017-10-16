@@ -1,4 +1,4 @@
-;;;; This lisp file has the functions to run the Wizard's Adventure Game for assignment 3.
+;;;; This lisp file has the functions to run the Wizard's Adventure Game for assignment 4, part B.
 
 (defparameter +ID+ "Kalen Bagano") ;The variable +ID+ contains my name.
 
@@ -108,11 +108,34 @@
 (defun have (object) 
     (member object (cdr (inventory))))
 	
-	
+;;;This macro adds an item to the game. It works by first pushing all the locations in the game onto a list that can be checked against, and then it performs error checking
+;;;to see whether or not the object already exists, and whether or not the location exists or not. If the object does not already exist and the location is a real location,
+;;;the macro places the object there by push the object onto the list *objects* and the object and location onto the list *object-locations*.
 (defmacro new-object (obj loc)
-	`(progn (push ,obj *objects*)
-			(push (list ,obj ,loc) *object-locations*)
+	`(let ((temp ()))
+		(loop for i in *nodes* 
+			do (push (car i) temp)
+		) 
+		(cond ((member ,obj *objects*) (print "The object already exists"))
+			  ((not (member ,loc temp)) (print "The location does not exist"))
+			  (t (push (list ,obj ,loc) *object-locations*) (push ,obj *objects*) (format t "You placed ~A at ~A." ,obj ,loc))
+		)
 	 )
+)
+
+
+(defmacro new-path (loc-from loc-to direction path)
+	`(let ((temp ()) (temp2 ()))
+		(loop for i in *nodes* 
+			do (push (car i) temp)
+		)
+		(cond ((not (member ,loc-from temp)) (print "The location does not exist"))
+			  ((not (member ,loc-to temp)) (print "The location does not exist"))
+			  ((member (list ,loc-to ,direction ,path) (cdr (assoc ,loc-from *edges*))) (print "The path already exists"))
+			  (t (loop for k in *edges* do (if (not (equal (car k) ,loc-from)) (push k temp2) 'donothing)) 
+				(push (list ,loc-from (list ,loc-to ,direction ,path)) temp2) (format t "You placed a ~A from ~A to ~A." ,path ,loc-from ,loc-to) temp2)
+		)
+	)
 )
 
 
