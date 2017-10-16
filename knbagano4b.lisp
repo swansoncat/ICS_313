@@ -123,17 +123,22 @@
 	 )
 )
 
-
-(defmacro new-path (loc-from loc-to direction path)
-	`(let ((temp ()) (temp2 ()))
+;;;This macro creates new paths between locations in the game. The locations need to exist and the macro checks for that and returns an error message if a location that doesn't
+;;;exist is passed as a parameter. Additionally the path cannot already exist and the macro will also return an error message it it does.
+(defmacro new-path (loc-from loc-to direction path &optional wayBack)
+	`(let ((temp ()) (temp2 ()) (modNode ()))
 		(loop for i in *nodes* 
 			do (push (car i) temp)
 		)
 		(cond ((not (member ,loc-from temp)) (print "The location does not exist"))
 			  ((not (member ,loc-to temp)) (print "The location does not exist"))
-			  ((member (list ,loc-to ,direction ,path) (cdr (assoc ,loc-from *edges*))) (print "The path already exists"))
-			  (t (loop for k in *edges* do (if (not (equal (car k) ,loc-from)) (push k temp2) 'donothing)) 
-				(push (list ,loc-from (list ,loc-to ,direction ,path)) temp2) (format t "You placed a ~A from ~A to ~A." ,path ,loc-from ,loc-to) temp2)
+			  ((member (list ,loc-to ,direction ,path) (cdr (assoc ,loc-from *edges*)) :test #'equal) (print "The path already exists"))
+			  (t (loop for k in *edges* do (if (not (equal (car k) ,loc-from)) (push k temp2) (setf modNode k))) 
+				(push (list ,loc-to ,direction ,path) (cdr modNode)) (push modNode temp2) 
+				(format t "You placed a ~A from ~A to ~A.~C" ,path ,loc-from ,loc-to #\linefeed) (setf *edges* temp2))
+		)
+		(cond ((null ,wayBack) *edges*)
+			  (t (new-path ,loc-to ,loc-from ,wayBack ,path)) 
 		)
 	)
 )
