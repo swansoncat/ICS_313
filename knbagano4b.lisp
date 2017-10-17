@@ -110,7 +110,8 @@
 	
 ;;;This macro adds an item to the game. It works by first pushing all the locations in the game onto a list that can be checked against, and then it performs error checking
 ;;;to see whether or not the object already exists, and whether or not the location exists or not. If the object does not already exist and the location is a real location,
-;;;the macro places the object there by push the object onto the list *objects* and the object and location onto the list *object-locations*.
+;;;the macro places the object there by expanding into push functions that push the object onto the global variable list *objects* and the pair (object, location) onto the 
+;;;global variable list *object-locations*.
 (defmacro new-object (obj loc)
 	`(let ((temp ()))
 		(loop for i in *nodes* 
@@ -124,16 +125,22 @@
 )
 
 ;;;This macro creates new paths between locations in the game. The locations need to exist and the macro checks for that and returns an error message if a location that doesn't
-;;;exist is passed as a parameter. Additionally the path cannot already exist and the macro will also return an error message it it does.
+;;;exist is passed as a parameter. Additionally the path cannot already exist and the macro will also return an error message if it does. This function works by modifying the 
+;;;*edges* global variable. It pushes the locations/edges that aren't being modified onto one list and puts the location/edges being modified on another. The cdr function is
+;;;is used on the list with the one location to retrive the list of edges, and the new edge is added to this list. The single location is then added to all the other locations,
+;;;and then the *edges* global varible is set to our combined list. The last optional variable indicates whether or not we are creating a two way edge or a one way edge. 
+;;;The parameter 'wayback' should be interpreted as being the opposite of whatever the parameter 'direction' is. For example, if you are making a door that is in the south of 
+;;;the location, 'wayback' would be set to north. This is not a strict rule though, as the player would be allowed to create something like a portal that could be anywhere in a 
+;;;location.
 (defmacro new-path (loc-from loc-to direction path &optional wayBack)
 	`(let ((temp ()) (temp2 ()) (modNode ()))
 		(loop for i in *nodes* 
-			do (push (car i) temp)
+			do (push (car i) temp) 
 		)
 		(cond ((not (member ,loc-from temp)) (print "The location does not exist"))
 			  ((not (member ,loc-to temp)) (print "The location does not exist"))
 			  ((member (list ,loc-to ,direction ,path) (cdr (assoc ,loc-from *edges*)) :test #'equal) (print "The path already exists"))
-			  (t (loop for k in *edges* do (if (not (equal (car k) ,loc-from)) (push k temp2) (setf modNode k))) 
+			  (t (loop for k in *edges* do (print (car k)) do (if (not (equal (car k) ,loc-from)) (push k temp2) (setf modNode k))) 
 				(push (list ,loc-to ,direction ,path) (cdr modNode)) (push modNode temp2) 
 				(format t "You placed a ~A from ~A to ~A.~C" ,path ,loc-from ,loc-to #\linefeed) (setf *edges* temp2))
 		)
@@ -141,6 +148,27 @@
 			  (t (new-path ,loc-to ,loc-from ,wayBack ,path)) 
 		)
 	)
+)
+
+;;;This macro creates a new location. It works first by getting all the locations in the *nodes* global variable and putting it into a list for error checking, like
+;;;in the new-object macro. It first does error checking to see whether or not the location already exists, and then it creates the new location by adding the location
+;;;name and description onto the *nodes* global variable by expanding into a normal push function with the given information.
+(defmacro new-location (loc desc)
+	`(let ((temp ()))
+		(loop for i in *nodes* 
+			do (push (car i) temp)
+		) 
+		(cond ((member ,loc temp) (print "The location already exists"))
+			  (t (push (list ,loc ,desc) *nodes*) (push (list ,loc) *edges* ) (format t "You created a new location, ~A. Its description is ~A." ,loc ,desc))
+		)
+	 )
+)
+
+;;;This is a macro that combines the previous three macros. It creates a new location, places a object there, and creates either a path from the new location to an already
+;;;existing location, or if the last parameter in the (new-path) macro is set it then creates a two way path.
+(defmacro combined-mod (new-loc desc obj loc-to direction path &optional wayback)
+	`(progn (new-location ,new-loc ,desc) (new-object ,obj ,new-loc) (new-path ,new-loc ,loc-to ,direction ,path ,wayback)
+	 )
 )
 
 

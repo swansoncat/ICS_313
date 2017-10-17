@@ -1,4 +1,6 @@
-;;;; This lisp file has the functions to run the Wizard's Adventure Game for assignment 3.
+;;;; This lisp file has the functions to run the Wizard's Adventure Game for assignment 4, part A. This version of the game contains 5 new items which are parts of a bicycle,
+;;;; and a function to create the bicycle once you have all 5 parts in your inventory. Additionally the function (pickup object) has been modified to remove the old item
+;;;; and locations from the *object-locations* list.
 
 (defparameter +ID+ "Kalen Bagano") ;The variable +ID+ contains my name.
 
@@ -115,14 +117,16 @@
 (defun inventory ()
   (cons 'items- (objects-at 'body *objects* *object-locations*)))
 
-;;;This function returns whether or not a player is carrying a given object.
+;;;This function returns whether or not a player is carrying a given object. This function removes the 5 items from the player's inventory and adds the bicycle to it.
 (defun have (object) 
     (member object (cdr (inventory))))
 	
-;;;This function creates the bicycle if the user has all 5 bicycle parts
+;;;This function creates the bicycle if the user has all 5 bicycle parts. It works by first checking if the player has all 5 bicycle parts in their inventory. If the
+;;;player has all the parts, the bicycle parts are removed from their inventory and a new item 'bicycle' is added to it. If the player does not have all the parts,
+;;;the function tells the player so.
 (defun create-bicycle ()
-	(let ((kalenz 0)) (loop for i in (inventory) do (if (member i *bikeparts*) (setf kalenz (1+ kalenz)) 'donothing))
-				 (if (eq kalenz 5) (progn (loop for j in *object-locations* do (if (member (car j) *bikeparts*) (setf *object-locations* (remove j *object-locations* :test #'equal)))
+	(let ((b-index 0)) (loop for i in (inventory) do (if (member i *bikeparts*) (setf b-index (1+ b-index)) 'donothing))
+				 (if (eq b-index 5) (progn (loop for j in *object-locations* do (if (member (car j) *bikeparts*) (setf *object-locations* (remove j *object-locations* :test #'equal)))
 																		do (if (member (car j) *objects*) (setf *objects* (remove j *objects*)))
 																		)
 									 (push 'bicycle *objects*) (push '(bicycle body) *object-locations*)
@@ -131,28 +135,32 @@
 	)  
 )	
 
-
 ;  wizards_game part 2
 
+;;;This is a function to replicate the REPL so that we can control how to player plays the game.
 (defun game-repl ()
     (let ((cmd (game-read)))
         (unless (eq (car cmd) 'quit)
             (game-print (game-eval cmd))
             (game-repl))))
 
+;;;This is a function that reads the players input within the function (game-repl)			
 (defun game-read ()
     (let ((cmd (read-from-string (concatenate 'string "(" (read-line) ")"))))
          (flet ((quote-it (x)
                     (list 'quote x)))
              (cons (car cmd) (mapcar #'quote-it (cdr cmd))))))
 
-(defparameter *allowed-commands* '(look walk pickup inventory))
+;;;This is a list that contains the functions the player is allowed to use within the game. This has been modified from the original to allow use of the (create-bicycle) function.
+(defparameter *allowed-commands* '(look walk pickup inventory create-bicycle))
 
+;;;This is a function that checks whether or not the command the player inputted is allowed, and if it is then it evaluates it with the (eval) function.
 (defun game-eval (sexp)
     (if (member (car sexp) *allowed-commands*)
         (eval sexp)
         '(i do not know that command.)))
 
+;;;This function modifies strings before it is outputted to the user in the (game-repl) function.		
 (defun tweak-text (lst caps lit)
   (when lst
     (let ((item (car lst))
@@ -164,6 +172,7 @@
             (caps (cons (char-upcase item) (tweak-text rest nil lit)))
             (t (cons (char-downcase item) (tweak-text rest nil nil)))))))
 
+;;;This is a function that prints output to the player in the (game-repl) function.
 (defun game-print (lst)
     (princ (coerce (tweak-text (coerce (string-trim "() " (prin1-to-string lst)) 'list) t nil) 'string))
     (fresh-line))	
