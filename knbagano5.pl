@@ -40,7 +40,19 @@ sitone(A,B,C,D,E,F) :-
 	\+ (pair(C,D) = pair(E,F)), \+ (pair(B,A) = pair(E,F)),\+ (A = B), \+ (B = C), \+ (C = D), \+ (D = E), \+ (E = F).
 	
 
+/* This is the code for situation two. It works via the fact that no adjacent pairs will ever be the same, and pairs (1,2),(3,4),and (5,6)
+will never be the same.
+*/
+color(black,red).
+color(black,blue).	
+color(red,black).
+color(blue,black).
+color(black,black).
+sittwo(A,B,C,D,E,F) :-
+	color(A,B), color(C,D), color(E,F),\+ (pair(A,B) = pair(C,D)), \+ (pair(C,D) = pair(E,F)), \+ (pair(A,B) = pair(E,F)),
+	\+ (pair(B,A) = pair(C,D)), \+ (pair(B,A) = pair(E,F)), \+ (pair(D,C) = pair(E,F)), \+ (pair(A,B) = pair(B,C)),
+	\+ (pair(B,C) = pair(C,D)), \+ (pair(C,D) = pair(D,E)), \+ (pair(D,E) = pair(E,F)).
+
 	
-
-
-
+	
+	
