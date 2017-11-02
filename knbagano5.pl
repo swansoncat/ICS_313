@@ -29,7 +29,8 @@ listlength(List, Length) :-
 First you can't have the same pair back to back cause that would mean the last two items or first two are the same color. Second
 you can't have the first and last pair be the same or else the third and fourth item would be the same. Lastly you can't have the
 last pair be the reverse of the first pair or else the third and fourth item would be the same. After checking for these inferred rules,
-the predicate checks for the rule that no adjacent ball is the same color.
+the predicate checks for the rule that no adjacent ball is the same color. According to my calculations, there should be 30 different
+solutions for this.
 */
 pair(blue,yellow).
 pair(blue,green).
@@ -44,7 +45,7 @@ sitone(A,B,C,D,E,F) :-
 
 /* This is the code for situation two. It works via the fact that no adjacent pairs will ever be the same, and pairs (1,2),(3,4),and (5,6)
 will never be the same. It checks to make sure that the three main pairs (A & B, C & D, E & F) are one of the 5 possibilities listed below, and
-then applied the prior mentioned rules.
+then applied the prior mentioned rules. According to my calculations, there should be 10 solutions to this.
 */
 color(black,red).
 color(black,blue).	
@@ -65,7 +66,7 @@ pair can't be red, or if it is red the first item has to be green. This is check
 
 The main predicate has a few main parts. First it puts all the items into a list so that it can be used for the count() predicate. Then it
 says that all arguments have to be one of the four colors. Then is the application of the specific rules of the situation such as how many balls
-of each color there are and the requirements of specific positions.
+of each color there are and the requirements of specific positions. According to my calculations, there are only 3 solutions to this.
 
 
 Notes for self below:
@@ -101,14 +102,27 @@ sit3(A,B,C,D,E,F,G,H) :-
 	rg(G,H,GGcount), GGcount ==  1.
 	
 
-/* This is the code checking to see if a list of integers can be split into 3 parts whose total is less than N.
-How I'm expecting this should work is that you need to get the first part by traversing till you find its greater than N, and then
-with the remaining part do the same. This probably needs to be done recursively.
+/* This is the code checking to see if a list of integers can be split into 3 parts whose total is less than N. This problem appears to be a 
+'greedy' one and the predicate was created with that in mind. The overall idea is that you start from the beginning of the list and add up integers
+until you reach the N value or the highest value you can get to without going over N. This is done a maximum of three times. If after the third time
+there are still integers then the list cannot be broken into 3 parts whose sum is less than or equal to N. If you get to the end and find that the 
+last part would be below N if you could just push the first integer back into the second part, the algorithm has already tested and determined that
+the first integer of part 3 couldn't fit, and to get it to fit, you would have to push the first integer of part 2 back into part 1, but the algorithm
+has already tested and proved that won't fit into part 1 as well.
 
-This is a greedy problem.
+The predicate is really made up of two helper predicates. testr() checks the head of the list against how much space is left in that section,
+and passes the relevant information to the other helper predicate. This info is basically whether or not the current head can fit in the current
+part (first test), or if it needs to be placed into the next part and how much space it will take of the next part (third test), or if it fits but 
+takes up the rest of the space in the current part and that the algorithm needs to go to the next part (second test).
+
+The other helper predicate countElements() basically iterates over the list passed as an argument and passes that item and the current part 
+information to testr(), so that testr() can give it the information for the next item, and then countElements() recursively calls itself
+on the next item with this new information.
+
 -Note to self: '=' and 'is' are not evaluated the same. = seems to concatenate, is does mathematics
-Also cannot modify a argument that was passed as an outright number and not variable.
+-Also cannot modify a argument that was passed as an outright number, can only modify variables that haven't been instantiated.
 */
+
 countElements([], Remaining, Subsets,N).
 
 countElements(List, Remaining, Subsets,N) :-
@@ -118,11 +132,12 @@ countElements(List, Remaining, Subsets,N) :-
 	countElements(T, RemainingNew, SubsetsNew,N).
 
 testr(Head,Remainder,RetRemainder,Subsets,RetSubset,N) :-
-	Head < Remainder, RetRemainder is Remainder - Head, RetSubset is Subsets, write(RetSubset), write(Head), write(Remainder),nl;
-	Head == Remainder, RetRemainder is N, RetSubset is Subsets - 1, RetSubset >= 0, write(RetSubset), write(Head), write(Remainder),nl;
-	Head > Remainder, RetRemainder is N - Head, RetSubset is Subsets - 1, RetSubset > 0, write(RetSubset), write(Head), write(Remainder),nl.
+	Head < Remainder, Subsets > 0, RetRemainder is Remainder - Head, RetSubset is Subsets;
+	Head == Remainder, RetRemainder is N, RetSubset is Subsets - 1, RetSubset >= 0;
+	Head > Remainder, Head =< N, RetRemainder is N - Head, RetSubset is Subsets - 1, RetSubset > 0.
 	
-split3(List,N) :-
+split3(N,List) :-
+	listlength(List, L), L >= 3,
 	countElements(List,N,3,N).
 	
 	
