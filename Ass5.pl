@@ -179,12 +179,18 @@ proper_noun(lt_leslie) --> [lt, leslie].
 proper_noun(nurse_chapel) --> [nurse, chapel].
 
 verb(X^Y^[acts_in(X,Y)]) --> [acts, in].
+verb(X^Y^[play(X,Y)]) --> [is, the, actor, for].
+verb(X^Y^[play(Y,X)]) --> [is, the, character, of].
 verb(X^Y^[play(X,Y)]) --> [play].
 verb(X^Y^[play(X,Y)]) --> [played].
 verb(X^Y^[play(X,Y)]) --> [plays].
 verb(X^Y^[directed(X,Y)]) --> [direct].
 verb(X^Y^[directed(X,Y)]) --> [is, an, director].
 verb(X^Y^[directed(X,Y)]) --> [is, a, director].
+verb(X^Y^[directed(X,Y)]) --> [is, the, director].
+verb(X^Y^[directed(X,Y)]) --> [is, an, director, for].
+verb(X^Y^[directed(X,Y)]) --> [is, a, director, for].
+verb(X^Y^[directed(X,Y)]) --> [is, the, director, for].
 verb(X^Y^Z^[play_as(X,Y,Z)]) --> [play].
 verb(X^[actor(X)]) --> [is, a, actor].
 verb(X^[actor(X)]) --> [is, an, actor].
