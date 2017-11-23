@@ -23,6 +23,10 @@ top(Sentence) :-
 top(Sentence) :-
   did(Query, Sentence, []),
   showresults(Query).
+  
+top(Sentence) :-
+  right(Query, Sentence, []),
+  showresults(Query).
 
 top(Sentence) :-
   who(Who, Sentence, []), % This is a call to the DCG.
@@ -62,6 +66,12 @@ yesno(Sem) --> [is, it, true, that], statement(_^_^Sem).
 yesno(Sem) --> [is, it, true, that], statement(_^Sem).  
 
 yesno(Sem) --> [is, it, true, that], statement(Sem). 
+
+right(Sem) --> statement(_^_^Sem), [right].
+
+right(Sem) --> statement(_^Sem), [right].
+
+right(Sem) --> statement(Sem), [right].
 
 statement(S) --> singlestatement(S).
 
