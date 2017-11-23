@@ -27,6 +27,11 @@ top(Sentence) :-
 top(Sentence) :-
   right(Query, Sentence, []),
   showresults(Query).
+  
+top(Sentence) :-
+  what(What, Sentence, []),
+  write('The title is '),
+  write(What).
 
 top(Sentence) :-
   who(Who, Sentence, []), % This is a call to the DCG.
@@ -73,6 +78,10 @@ right(Sem) --> statement(_^Sem), [right].
 
 right(Sem) --> statement(Sem), [right].
 
+what(X) --> [what, is, the], verb_phrase(X^_^[Query]), {Query}.
+
+what(X) --> [what, are, the], verb_phrase(X^_^[Query]), {Query}.
+
 statement(S) --> singlestatement(S).
 
 statement(_^S) --> singlestatement(_^S).
@@ -117,6 +126,8 @@ proper_noun(star_wars4) --> [star, wars, iv].
 proper_noun(star_wars3) --> [star, wars, iii].
 proper_noun(star_trek) --> [star, trek].	
 proper_noun(star_trek_tv) --> [star, trek, tv].
+proper_noun(revenge_of_the_sith) --> [revenge, of, the, sith].
+proper_noun(a_new_hope) --> [a, new, hope].
 
 proper_noun(george_lucas) --> [george, lucas].
 proper_noun(jj_abrams) --> [jj, abrams].
@@ -194,6 +205,7 @@ verb(X^Y^[directed(X,Y)]) --> [is, the, director, for].
 verb(X^Y^Z^[play_as(X,Y,Z)]) --> [play].
 verb(X^[actor(X)]) --> [is, a, actor].
 verb(X^[actor(X)]) --> [is, an, actor].
+verb(X^Y^[title(Y,X)]) --> [title, for].
 
 /* DATABASE. Obviously, you're going to have to fill this out a lot. */
 
@@ -205,6 +217,8 @@ directed(george_lucas, star_wars4).
 directed(jj_abrams, star_trek).
 directed(marc_daniels, star_trek_tv).
 
+title(star_wars3, revenge_of_the_sith).
+title(star_wars4, a_new_hope).
 
 actor(ewan_mcgregor).
 actor(natalie_portman).
