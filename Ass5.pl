@@ -69,6 +69,12 @@ statement(_^S) --> singlestatement(_^S).
 
 statement(_^_^Sem) --> singlestatement(_^_^S1), [and], statement(_^_^S2), {append(S1,S2,Sem)}.
 
+statement(_^_^Sem) --> singlestatement(_^S1), [and], statement(_^_^S2), {append(S1,S2,Sem)}.
+
+statement(_^_^Sem) --> singlestatement(_^_^S1), [and], statement(_^S2), {append(S1,S2,Sem)}.
+
+statement(_^_^Sem) --> singlestatement(_^S1), [and], statement(_^S2), {append(S1,S2,Sem)}.
+
 singlestatement(Subj^Sem) --> 
  noun_phrase(Subj),
  verb_phrase(Subj^Sem).
