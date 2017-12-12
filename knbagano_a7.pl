@@ -108,6 +108,8 @@ while (my $info = <$fh>)
 			my $start_index = index $substr, "itemprop=\"name\"";
 			my $end_index = index $substr, "</span";
 			$substr = substr $substr, $start_index + 16, $end_index - $start_index - 16;
+			$substr =~ s/ /_/g;
+			$substr =~ s/\.//g;
 			print "$substr\n";
 			print $fh_w "acts_in($substr, $title).\n";
 			my $actor = $substr;
@@ -131,6 +133,8 @@ while (my $info = <$fh>)
 				$start_index = index $substr, "tt_cl_t";
 				$end_index = index $substr, "</a>";
 				$substr = substr $substr, $start_index + 11, $end_index - $start_index - 11;
+				$substr =~ s/ /_/g;
+				$substr =~ s/\.//g;
 				print "$substr\n";
 				print $fh_w "play($actor, $substr).\n";
 			} 
@@ -141,15 +145,21 @@ while (my $info = <$fh>)
 				$start_index = index $substr, "tt_cl_t";
 				$end_index = index $substr, "</a>";
 				$substr = substr $substr, $start_index + 10, $end_index - $start_index - 10;
+				$substr =~ s/ /_/g;
+				$substr =~ s/\.//g;
 				print "$substr\n";
 				print $fh_w "play($actor, $substr).\n";
 			}
 			else
 			{
 				$length = length $info;	
-				$start_index = index $info, "[:alpha:]{1}";
-				$end_index = rindex $info, "[:alpha:]{1}";
-				$substr = substr $info, $start_index + 1, $end_index - $start_index - 1;				
+				$info =~ s/ {2,}//g;
+				$start_index = index $info, "[:alpha:]";
+				$end_index = rindex $info, "[:alpha:]";
+				$substr = substr $info, $start_index + 1, $end_index - $start_index - 1;		
+				$substr =~ s/ /_/g;
+				$substr =~ s/\.//g;
+				chop($substr);
 				print "$substr\n";
 				print $fh_w "play($actor, $substr).\n";
 			}
