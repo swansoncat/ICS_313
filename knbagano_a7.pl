@@ -38,11 +38,24 @@ while (my $info = <$fh>)
 		my $title_index = index $info, ">";
 		my $title_end = index $info, "IDMB";
 		$title = substr $info, $title_index + 1, $title_end - $title_index;
+		if ($category eq "movie")
+		{
+			if ($title =~ m/([0123456789]{4})/)
+			{
+				$date_start = index $title, "(";
+				$title = substr $title, 0, $date_start - 1;
+				$title =~ s/ /_/g;
+				$title =~ s/\.//g;
+				print "The title is: $title\n";
+			}
+		}
 	}
 	
 	
-	if (category eq "person")
+	#This is the code for webpages about persons.
+	if ($category eq "person")
 	{
+		
 		if ($info =~ m/nm_flmg_dr/ && $info =~ m/<b>/)
 		{
 			my $length = length $info;		
@@ -51,7 +64,7 @@ while (my $info = <$fh>)
 			my $end_index = index $substr, "<";
 			$substr = substr $substr, $start_index + 1, $end_index - $start_index - 1;
 			print "$substr\n";
-			print $fh_w "directed($title, $substr)\n";
+			print $fh_w "directed($title, $substr).\n";
 		}
 		
 		if ($info =~ m/nm_flmg_act/ && $info =~ m/<b>/)
@@ -62,12 +75,15 @@ while (my $info = <$fh>)
 			my $end_index = index $substr, "<";
 			$substr = substr $substr, $start_index + 1, $end_index - $start_index - 1;
 			print "$substr\n";
-			print $fh_w "acts_in($title, $substr)\n";
+			print $fh_w "acts_in($title, $substr).\n";
 		}
 	}
 	
+	
+	#This is the code for webpages about movies.
 	if ($category eq "movie")
 	{
+		#This intial block of code gets the director for the movie
 		if ($info =~ m/itemprop="director"/) 
 		{
 			$info = <$fh>;
@@ -76,12 +92,16 @@ while (my $info = <$fh>)
 			my $start_index = index $substr, "itemprop=\"name\"";
 			my $end_index = index $substr, "</span";
 			$substr = substr $substr, $start_index + 16, $end_index - $start_index - 16;
+			$substr =~ s/ /_/g;
+			$substr =~ s/\.//g;
 			print "$substr\n";
-			print $fh_w "directed($substr, $title)\n";
+			print $fh_w "directed($substr, $title).\n";
 		}
 		
+		#This block of code gets the actors in the movie.
 		if ($info =~ m/itemprop="actor"/) 
 		{
+			#This block of code writes the acts_in(actor, movie) into the database.
 			$info = <$fh>;
 			my $length = length $info;		
 			my $substr = substr $info, 55, $length - 55;
@@ -89,7 +109,51 @@ while (my $info = <$fh>)
 			my $end_index = index $substr, "</span";
 			$substr = substr $substr, $start_index + 16, $end_index - $start_index - 16;
 			print "$substr\n";
-			print $fh_w "acts_in($substr, $title)\n";
+			print $fh_w "acts_in($substr, $title).\n";
+			my $actor = $substr;
+			
+			
+			#This block of code writes in the play(actor, character) into the database. This works by the knowledge that immediately after the actor name is a line with the text 
+			# 'class="character"' which the program uses to know where to find the character information. The character's name is 2 lines below the prior mentioned line.
+			#There are 3 if conditions that the code checks for. The line with the name can either have nothing on it or the text 'm/tt_cl_t/'. There are two if conditions because the
+			#indices of the names will change if the text 'm/tt_cl_t/' has a number with 1 or 2 digits immediatly after it.
+			$info = <$fh>;
+			while (!($info =~ m/class="character"/))
+			{
+				$info = <$fh>;
+			}
+			$info = <$fh>;
+			$info = <$fh>;
+			if ($info =~ m/tt_cl_t1/)
+			{
+				$length = length $info;		
+				$substr = substr $info, 50, $length - 50;
+				$start_index = index $substr, "tt_cl_t";
+				$end_index = index $substr, "</a>";
+				$substr = substr $substr, $start_index + 11, $end_index - $start_index - 11;
+				print "$substr\n";
+				print $fh_w "play($actor, $substr).\n";
+			} 
+			elsif ($info =~ m/tt_cl_t/)
+			{
+				$length = length $info;		
+				$substr = substr $info, 50, $length - 50;
+				$start_index = index $substr, "tt_cl_t";
+				$end_index = index $substr, "</a>";
+				$substr = substr $substr, $start_index + 10, $end_index - $start_index - 10;
+				print "$substr\n";
+				print $fh_w "play($actor, $substr).\n";
+			}
+			else
+			{
+				$length = length $info;	
+				$start_index = index $info, "[:alpha:]{1}";
+				$end_index = rindex $info, "[:alpha:]{1}";
+				$substr = substr $info, $start_index + 1, $end_index - $start_index - 1;				
+				print "$substr\n";
+				print $fh_w "play($actor, $substr).\n";
+			}
+
 		}
 	}
 	
