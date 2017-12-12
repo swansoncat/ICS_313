@@ -38,14 +38,15 @@ while (my $info = <$fh>)
 		my $title_index = index $info, ">";
 		my $title_end = index $info, "IDMB";
 		$title = substr $info, $title_index + 1, $title_end - $title_index;
+		$title =~ s/ /_/g;
+		$title =~ s/\.//g;
+		$title =~ s/://g;
 		if ($category eq "movie")
 		{
 			if ($title =~ m/([0123456789]{4})/)
 			{
 				$date_start = index $title, "(";
 				$title = substr $title, 0, $date_start - 1;
-				$title =~ s/ /_/g;
-				$title =~ s/\.//g;
 				print "The title is: $title\n";
 			}
 		}
@@ -63,6 +64,9 @@ while (my $info = <$fh>)
 			my $start_index = index $substr, ">";
 			my $end_index = index $substr, "<";
 			$substr = substr $substr, $start_index + 1, $end_index - $start_index - 1;
+			$substr =~ s/ /_/g;
+			$substr =~ s/\.//g;
+			$substr =~ s/://g;
 			print "$substr\n";
 			print $fh_w "directed($title, $substr).\n";
 		}
@@ -74,6 +78,9 @@ while (my $info = <$fh>)
 			my $start_index = index $substr, ">";
 			my $end_index = index $substr, "<";
 			$substr = substr $substr, $start_index + 1, $end_index - $start_index - 1;
+			$substr =~ s/ /_/g;
+			$substr =~ s/\.//g;
+			$substr =~ s/://g;
 			print "$substr\n";
 			print $fh_w "acts_in($title, $substr).\n";
 		}
@@ -94,6 +101,7 @@ while (my $info = <$fh>)
 			$substr = substr $substr, $start_index + 16, $end_index - $start_index - 16;
 			$substr =~ s/ /_/g;
 			$substr =~ s/\.//g;
+			$substr =~ s/://g;
 			print "$substr\n";
 			print $fh_w "directed($substr, $title).\n";
 		}
@@ -110,6 +118,7 @@ while (my $info = <$fh>)
 			$substr = substr $substr, $start_index + 16, $end_index - $start_index - 16;
 			$substr =~ s/ /_/g;
 			$substr =~ s/\.//g;
+			$substr =~ s/://g;
 			print "$substr\n";
 			print $fh_w "acts_in($substr, $title).\n";
 			my $actor = $substr;
@@ -135,6 +144,7 @@ while (my $info = <$fh>)
 				$substr = substr $substr, $start_index + 11, $end_index - $start_index - 11;
 				$substr =~ s/ /_/g;
 				$substr =~ s/\.//g;
+				$substr =~ s/://g;
 				print "$substr\n";
 				print $fh_w "play($actor, $substr).\n";
 			} 
@@ -147,6 +157,7 @@ while (my $info = <$fh>)
 				$substr = substr $substr, $start_index + 10, $end_index - $start_index - 10;
 				$substr =~ s/ /_/g;
 				$substr =~ s/\.//g;
+				$substr =~ s/://g;
 				print "$substr\n";
 				print $fh_w "play($actor, $substr).\n";
 			}
@@ -159,6 +170,7 @@ while (my $info = <$fh>)
 				$substr = substr $info, $start_index + 1, $end_index - $start_index - 1;		
 				$substr =~ s/ /_/g;
 				$substr =~ s/\.//g;
+				$substr =~ s/://g;
 				chop($substr);
 				print "$substr\n";
 				print $fh_w "play($actor, $substr).\n";
