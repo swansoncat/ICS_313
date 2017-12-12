@@ -40,7 +40,11 @@ while (my $info = <$fh>)
 		$title = substr $info, $title_index + 1, $title_end - $title_index;
 		$title =~ s/ /_/g;
 		$title =~ s/\.//g;
+		$title =~ s/-//g;
+		$title =~ s/!//g;
+		$title =~ s/\'//g;
 		$title =~ s/://g;
+		$title = lc $title;
 		if ($category eq "movie")
 		{
 			if ($title =~ m/([0123456789]{4})/)
@@ -66,7 +70,11 @@ while (my $info = <$fh>)
 			$substr = substr $substr, $start_index + 1, $end_index - $start_index - 1;
 			$substr =~ s/ /_/g;
 			$substr =~ s/\.//g;
+			$substr =~ s/-//g;
+			$substr =~ s/!//g;
+			$substr =~ s/\'//g;
 			$substr =~ s/://g;
+			$substr = lc $substr;
 			print "$substr\n";
 			print $fh_w "directed($title, $substr).\n";
 		}
@@ -80,7 +88,11 @@ while (my $info = <$fh>)
 			$substr = substr $substr, $start_index + 1, $end_index - $start_index - 1;
 			$substr =~ s/ /_/g;
 			$substr =~ s/\.//g;
+			$substr =~ s/-//g;
+			$substr =~ s/!//g;
+			$substr =~ s/\'//g;
 			$substr =~ s/://g;
+			$substr = lc $substr;
 			print "$substr\n";
 			print $fh_w "acts_in($title, $substr).\n";
 		}
@@ -101,7 +113,11 @@ while (my $info = <$fh>)
 			$substr = substr $substr, $start_index + 16, $end_index - $start_index - 16;
 			$substr =~ s/ /_/g;
 			$substr =~ s/\.//g;
+			$substr =~ s/-//g;
+			$substr =~ s/!//g;
+			$substr =~ s/\'//g;
 			$substr =~ s/://g;
+			$substr = lc $substr;
 			print "$substr\n";
 			print $fh_w "directed($substr, $title).\n";
 		}
@@ -118,7 +134,11 @@ while (my $info = <$fh>)
 			$substr = substr $substr, $start_index + 16, $end_index - $start_index - 16;
 			$substr =~ s/ /_/g;
 			$substr =~ s/\.//g;
+			$substr =~ s/-//g;
+			$substr =~ s/!//g;
+			$substr =~ s/\'//g;
 			$substr =~ s/://g;
+			$substr = lc $substr;
 			print "$substr\n";
 			print $fh_w "acts_in($substr, $title).\n";
 			my $actor = $substr;
@@ -135,7 +155,7 @@ while (my $info = <$fh>)
 			}
 			$info = <$fh>;
 			$info = <$fh>;
-			if ($info =~ m/tt_cl_t1/)
+			if ($info =~ m/tt_cl_t1[0123456789]/)
 			{
 				$length = length $info;		
 				$substr = substr $info, 50, $length - 50;
@@ -144,7 +164,11 @@ while (my $info = <$fh>)
 				$substr = substr $substr, $start_index + 11, $end_index - $start_index - 11;
 				$substr =~ s/ /_/g;
 				$substr =~ s/\.//g;
+				$substr =~ s/-//g;
+				$substr =~ s/!//g;
+				$substr =~ s/\'//g;
 				$substr =~ s/://g;
+				$substr = lc $substr;
 				print "$substr\n";
 				print $fh_w "play($actor, $substr).\n";
 			} 
@@ -157,7 +181,11 @@ while (my $info = <$fh>)
 				$substr = substr $substr, $start_index + 10, $end_index - $start_index - 10;
 				$substr =~ s/ /_/g;
 				$substr =~ s/\.//g;
+				$substr =~ s/-//g;
+				$substr =~ s/!//g;
+				$substr =~ s/\'//g;
 				$substr =~ s/://g;
+				$substr = lc $substr;
 				print "$substr\n";
 				print $fh_w "play($actor, $substr).\n";
 			}
@@ -170,7 +198,11 @@ while (my $info = <$fh>)
 				$substr = substr $info, $start_index + 1, $end_index - $start_index - 1;		
 				$substr =~ s/ /_/g;
 				$substr =~ s/\.//g;
+				$substr =~ s/-//g;
+				$substr =~ s/!//g;
+				$substr =~ s/\'//g;
 				$substr =~ s/://g;
+				$substr = lc $substr;
 				chop($substr);
 				print "$substr\n";
 				print $fh_w "play($actor, $substr).\n";
