@@ -22,6 +22,7 @@ while ($category ne "person" && $category ne "movie")
 my $file_name = $ARGV[0];
 my $write_file = 'database.pl';
 my $title; #name of person or movie
+my @acts_in;
 
 open my $fh, '<', $file_name or die "Can't open read file: $_";
 open my $fh_w, '>>', $write_file or die "Can't open write file: $_";
@@ -118,7 +119,6 @@ while (my $info = <$fh>)
 			$substr =~ s/\'//g;
 			$substr =~ s/://g;
 			$substr = lc $substr;
-			print "$substr\n";
 			print $fh_w "directed($substr, $title).\n";
 		}
 		
@@ -139,8 +139,8 @@ while (my $info = <$fh>)
 			$substr =~ s/\'//g;
 			$substr =~ s/://g;
 			$substr = lc $substr;
-			print "$substr\n";
-			print $fh_w "acts_in($substr, $title).\n";
+			push @acts_in, "acts_in($substr, $title).\n";
+			#print $fh_w "acts_in($substr, $title).\n";
 			my $actor = $substr;
 			
 			
@@ -210,12 +210,15 @@ while (my $info = <$fh>)
 
 		}
 	}
-	
-	
+}
+my $acts_in = shift @acts_in;
+while ($acts_in)
+{
+	print $fh_w $acts_in;
+	$acts_in = shift @acts_in;
 }
 
 close $fh or die "Unable to close read file: $_";
 close $fh_w or die "Unable to close write file: $_";
-
 
 
