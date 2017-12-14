@@ -1,0 +1,85 @@
+Script started on Mon 16 Oct 2017 08:47:05 PM HST
+]0;gary@gary-VirtualBox: /media/sf_VBoxSharedFolder/ICS_313gary@gary-VirtualBox:/media/sf_VBoxSharedFolder/ICS_313$ clisp
+  i i i i i i i       ooooo    o        ooooooo   ooooo   ooooo
+  I I I I I I I      8     8   8           8     8     o  8    8
+  I  \ `+' /  I      8         8           8     8        8    8
+   \  `-+-'  /       8         8           8      ooooo   8oooo
+    `-__|__-'        8         8           8           8  8
+        |            8     o   8           8     o     8  8
+  ------+------       ooooo    8oooooo  ooo8ooo   ooooo   8
+
+Welcome to GNU CLISP 2.49 (2010-07-07) <http://clisp.cons.org/>
+
+Copyright (c) Bruno Haible, Michael Stoll 1992, 1993
+Copyright (c) Bruno Haible, Marcus Daniels 1994-1997
+Copyright (c) Bruno Haible, Pierpaolo Bernardi, Sam Steingold 1998
+Copyright (c) Bruno Haible, Sam Steingold 1999-2000
+Copyright (c) Sam Steingold, Bruno Haible 2001-2010
+
+Type :h and hit Enter for context help.
+
+[1]> (lo[Koad "knbagno[K[Kano4b.lisp")[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C
+;; Loading file knbagano4b.lisp ...
+;; Loaded file knbagano4b.lisp
+T
+[2]> *edges[K[K[K[K[Knodes*
+((LIVING-ROOM (YOU ARE IN THE LIVING-ROOM. A WIZARD IS SNORING LOUDLY ON THE COUCH.)) (GARDEN (YOU ARE IN A BEAUTIFUL GARDEN. THERE IS A WELL IN FRONT OF YOU.))
+ (ATTIC (YOU ARE IN THE ATTIC. THERE IS A GIANT WELDING TORCH IN THE CORNER.)) (BEDROOM (YOU ARE IN THE BEDROOM. THERE IS A LADY WIZARD SLEEPING QUIETLY ON THE BED.))
+ (KITCHEN (YOU ARE IN THE KITCHEN. THERE IS A LARGE FRIDGE ALONG THE WALL.)))
+[3]> *edges*
+((LIVING-ROOM (GARDEN WEST DOOR) (ATTIC UPSTAIRS LADDER) (BEDROOM NORTH DOOR) (KITCHEN EAST DOOR)) (BEDROOM (LIVING-ROOM SOUTH DOOR)) (KITCHEN (LIVING-ROOM WEST DOOR)) (GARDEN (LIVING-ROOM EAST DOOR))
+ (ATTIC (LIVING-ROOM DOWNSTAIRS LADDER)))
+[4]> *objects*
+(WHISKEY BUCKET BEER PIE HAT SHIRT FROG CHAIN)
+[5]> *object-locations*)[K
+((WHISKEY LIVING-ROOM) (BUCKET LIVING-ROOM) (BEER KITCHEN) (PIE KITCHEN) (HAT BEDROOM) (SHIRT BEDROOM) (CHAIN GARDEN) (FROG GARDEN))
+[6]> (combined-mod 'dungeon '(YOu are[K[K[K[K[K[Kou are in the dungeon. It is dark here.)[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C 'skeleton 'attic 'center 'portal 'center)[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C
+You created a new location, DUNGEON. Its description is (YOU ARE IN THE DUNGEON. IT IS DARK HERE.).You placed SKELETON at DUNGEON.
+DUNGEON 
+LIVING-ROOM 
+BEDROOM 
+KITCHEN 
+GARDEN 
+ATTIC You placed a PORTAL from DUNGEON to ATTIC.
+
+DUNGEON 
+ATTIC 
+GARDEN 
+KITCHEN 
+BEDROOM 
+LIVING-ROOM You placed a PORTAL from ATTIC to DUNGEON.
+((ATTIC (DUNGEON CENTER PORTAL) (LIVING-ROOM DOWNSTAIRS LADDER)) (LIVING-ROOM (GARDEN WEST DOOR) (ATTIC UPSTAIRS LADDER) (BEDROOM NORTH DOOR) (KITCHEN EAST DOOR)) (BEDROOM (LIVING-ROOM SOUTH DOOR))
+ (KITCHEN (LIVING-ROOM WEST DOOR)) (GARDEN (LIVING-ROOM EAST DOOR)) (DUNGEON (ATTIC CENTER PORTAL)))
+[7]> *[K(combined-mod 'dungeon '(You are in the dungeon. It is dark here.) 'skeleton 'attic 'center 'portal 'center)[C[C[C[C[C*object-locations*[Ks*[K[C[C[C[C[C[C[2Pedges*nodes*
+((DUNGEON (YOU ARE IN THE DUNGEON. IT IS DARK HERE.)) (LIVING-ROOM (YOU ARE IN THE LIVING-ROOM. A WIZARD IS SNORING LOUDLY ON THE COUCH.))
+ (GARDEN (YOU ARE IN A BEAUTIFUL GARDEN. THERE IS A WELL IN FRONT OF YOU.)) (ATTIC (YOU ARE IN THE ATTIC. THERE IS A GIANT WELDING TORCH IN THE CORNER.))
+ (BEDROOM (YOU ARE IN THE BEDROOM. THERE IS A LADY WIZARD SLEEPING QUIETLY ON THE BED.)) (KITCHEN (YOU ARE IN THE KITCHEN. THERE IS A LARGE FRIDGE ALONG THE WALL.)))
+[8]> *nodes*[C[C[C[C[C(combined-mod 'dungeon '(You are in the dungeon. It is dark here.) 'skeleton 'attic 'center 'portal 'center)[C[C[C[C[C*object-locations*[Ks*[K[C[C[C[C[C[C[2Pedges*
+((ATTIC (DUNGEON CENTER PORTAL) (LIVING-ROOM DOWNSTAIRS LADDER)) (LIVING-ROOM (GARDEN WEST DOOR) (ATTIC UPSTAIRS LADDER) (BEDROOM NORTH DOOR) (KITCHEN EAST DOOR)) (BEDROOM (LIVING-ROOM SOUTH DOOR))
+ (KITCHEN (LIVING-ROOM WEST DOOR)) (GARDEN (LIVING-ROOM EAST DOOR)) (DUNGEON (ATTIC CENTER PORTAL)))
+[9]> *edges*nodes*[C[C[C[C[C(combined-mod 'dungeon '(You are in the dungeon. It is dark here.) 'skeleton 'attic 'center 'portal 'center)[C[C[C[C[C*object-locations*[Ks*[K
+(SKELETON WHISKEY BUCKET BEER PIE HAT SHIRT FROG CHAIN)
+[10]> *objects*[2Pedges*nodes*(combined-mod 'dungeon '(You are in the dungeon. It is dark here.) 'skeleton 'attic 'center 'portal 'center)[C[C[C[C[C[C*object-locations*[K
+((SKELETON DUNGEON) (WHISKEY LIVING-ROOM) (BUCKET LIVING-ROOM) (BEER KITCHEN) (PIE KITCHEN) (HAT BEDROOM) (SHIRT BEDROOM) (CHAIN GARDEN) (FROG GARDEN))
+[11]> (look)[C[C[C[C[C[C
+(YOU ARE IN THE LIVING-ROOM. A WIZARD IS SNORING LOUDLY ON THE COUCH. THERE IS A DOOR GOING WEST FROM HERE. THERE IS A LADDER GOING UPSTAIRS FROM HERE. THERE IS A DOOR GOING NORTH FROM HERE. THERE IS A
+ DOOR GOING EAST FROM HERE. YOU SEE A WHISKEY ON THE FLOOR. YOU SEE A BUCKET ON THE FLOOR.)
+[12]> (walk 'upstrai[K[K[Kairs)[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C
+(YOU ARE IN THE ATTIC. THERE IS A GIANT WELDING TORCH IN THE CORNER. THERE IS A PORTAL GOING CENTER FROM HERE. THERE IS A LADDER GOING DOWNSTAIRS FROM HERE.)
+[13]> (walk 'center)[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C
+(YOU ARE IN THE DUNGEON. IT IS DARK HERE. THERE IS A PORTAL GOING CENTER FROM HERE. YOU SEE A SKELETON ON THE FLOOR.)
+[14]> (picjup[K[K[Kkup 'skeleton)[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C
+(YOU ARE NOW CARRYING THE SKELETON)
+[15]> (look)[C[C[C[C[C[C
+(YOU ARE IN THE DUNGEON. IT IS DARK HERE. THERE IS A PORTAL GOING CENTER FROM HERE.)
+[16]> (inventory)[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C
+(ITEMS- SKELETON)
+[17]> (walk 'center)[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C
+(YOU ARE IN THE ATTIC. THERE IS A GIANT WELDING TORCH IN THE CORNER. THERE IS A PORTAL GOING CENTER FROM HERE. THERE IS A LADDER GOING DOWNSTAIRS FROM HERE.)
+[18]> (wak '[K[K[Klk 'don[Kwnstra[K[Kairs)[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C
+(YOU ARE IN THE LIVING-ROOM. A WIZARD IS SNORING LOUDLY ON THE COUCH. THERE IS A DOOR GOING WEST FROM HERE. THERE IS A LADDER GOING UPSTAIRS FROM HERE. THERE IS A DOOR GOING NORTH FROM HERE. THERE IS A
+ DOOR GOING EAST FROM HERE. YOU SEE A WHISKEY ON THE FLOOR. YOU SEE A BUCKET ON THE FLOOR.)
+[19]> (quit)[C[C[C[C[C[C
+Bye.
+]0;gary@gary-VirtualBox: /media/sf_VBoxSharedFolder/ICS_313gary@gary-VirtualBox:/media/sf_VBoxSharedFolder/ICS_313$ exit
+Script done on Mon 16 Oct 2017 08:50:03 PM HST

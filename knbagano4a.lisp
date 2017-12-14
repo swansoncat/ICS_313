@@ -1,6 +1,6 @@
 ;;;; This lisp file has the functions to run the Wizard's Adventure Game for assignment 4, part A. This version of the game contains 5 new items which are parts of a bicycle,
 ;;;; and a function to create the bicycle once you have all 5 parts in your inventory. Additionally the function (pickup object) has been modified to remove the old item
-;;;; and locations from the *object-locations* list.
+;;;; and locations from the *object-locations* list. I have included a list on the bottom of attempts to break the game-repl.
 
 (defparameter +ID+ "Kalen Bagano") ;The variable +ID+ contains my name.
 
@@ -178,3 +178,49 @@
     (fresh-line))	
 	
 	
+;;;;;;;;;;;;;;;;;;;;;
+;
+; When trying to break the game-repl, my initial thought was that I would try to inject some code as a parameter that it would evaluate when trying to use the parameter. This 
+; off the top of my head I figured this wouldn't be possible with the look and inventory commands as they don't take any parameters, so to attempt this I would do it with the
+; pick and walk commands as those take a parameter. After some effort I realized this wouldn't be possible as whatever is passed as the second parameter would always be quoted,
+; and any additional parameters would be outright break the game leading back to the main repl. Reading through textbook confirms that this is indeed the case, and that the
+; only way to break this in particular would be with reader macros.
+;
+; -extra parameters on real function break repl
+; -single apostrophe (nothing else) breaks repl
+; -double apostrophe (nothing else) in a row breaks repl
+; -single backquote (nothing else) breaks repl
+; -double backquote (nothing else) in a row breaks repl
+; -any series of characters that are surrounded by apostrophes breaks repl
+; -any series of characters that are surrounded by backquotes breaks repl
+; -single right facing parantheses will break repl
+; -single left facing parentheses will break repl
+; -things that can be interpreted as an open function will break repl. For example: '(look , (look , '(fake-function , (fake-function , (hello () world , etc.
+; -apostrophe attached to a left facing parentheses anywhere input will break repl ( ') ).
+; -backquotes and apostrophes will be evaluates okay so long as only one is attached to a given character string or what could be interprefed as a function
+;
+; Below is a list of attempts to change the global variables to break the game or to get it to execute code from a parameter.
+; *objects
+; 'objects
+; '*objects
+; ,*objects
+; `,objects
+; `,*objects*
+; look print "Kalen"
+; pickup (print "Kalen)
+; pickup (push 'car *allowed-commands*)
+; pickup ,(push 'car *allowed-commands*)
+; pickup `,(push 'car *allowed-commands*)
+; pickup `,(let ((a look)) (push 'car *allowed-commands*) a)
+; pickup `,(let ((a bucket)) (push 'car *allowed-commands*) a)
+; pickup `,(let ,((a ,whiskey)) ,(push ,'car ,*allowed-commands*) ,a)
+; (let ((a look) a)
+; `,(let ((a look)) a)
+; (let ((a quit)) a)
+; `,(let ((a quit)) a)
+; `,(let ((a 'lookquit)) a)
+; `(,look
+; `(,look)
+; `,(look)
+; `,look
+; `,'look
