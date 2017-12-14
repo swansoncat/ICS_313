@@ -1,0 +1,14 @@
+;;;;This file contains my answer to part 3 of assignment 1, in which we were asked about the two
+;;;;modes for the ftp and sftp protocols.
+
+The two modes provided by ftp and sftp are binary and ASCII mode. In Binary transfer mode a file is 
+transferred to the new computer exactly byte for byte as it was on the old one. This may be a issue
+if you're sending a text file between computers with different operating systems because different
+operating systems encode special characters like line breaks differently. In ASCII mode, ftp and
+sftp converts the special characters when transferring the text files between computers with
+different operating systems. So for most files they would be sent in Binary mode but things like text
+files, scripts, html files, etc., would be sent via the ASCII mode.
+
+Sources...
+mingersoft.com/blog
+serverfault.com/questions

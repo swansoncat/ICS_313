@@ -1,0 +1,102 @@
+;;;;This file contains the script showing that I know how to use basic commands in Linux/Unix for
+;;;;assignment 1.
+
+Script started on Wed 23 Aug 2017 11:14:54 PM HST
+uhx02:/home/15/knbagano/ics313/a1_ics313% echo "Hi I'm Kalen"
+Hi I'm Kalen
+uhx02:/home/15/knbagano/ics313/a1_ics313% ls -l
+total 0
+-rw-r--r--. 1 knbagano uh 0 Aug 23 23:14 typescript
+uhx02:/home/15/knbagano/ics313/a1_ics313% echo "see that there are no files here "
+see that there are no files here
+uhx02:/home/15/knbagano/ics313/a1_ics313% pwd
+/home/15/knbagano/ics313/a1_ics313
+uhx02:/home/15/knbagano/ics313/a1_ics313% echo "see that we're in a directory a[Kma de for assignment 1 for ics13[K[K313"
+see that we're in a directory made for assignment 1 for ics313
+uhx02:/home/15/knbagano/ics313/a1_ics313% mkdir new dir[K[K[K[KDirectory
+uhx02:/home/15/knbagano/ics313/a1_ics313% s[Kls -l
+total 0
+drwxr-xr-x. 2 knbagano uh 6 Aug 23 23:15 [0m[01;34mnewDirectory[0m
+-rw-r--r--. 1 knbagano uh 0 Aug 23 23:14 typescript
+uhx02:/home/15/knbagano/ics313/a1_ics313% rmdir newDirectory
+uhx02:/home/15/knbagano/ics313/a1_ics313% ls -l
+total 0
+-rw-r--r--. 1 knbagano uh 0 Aug 23 23:14 typescript
+uhx02:/home/15/knbagano/ics313/a1_ics313% echo "see that we made and then delete d a re[K[Kdirectory"
+see that we made and then deleted a directory
+uhx02:/home/15/knbagano/ics313/a1_ics313% echo elephants | cat > file1.txt
+uhx02:/home/15/knbagano/ics313/a1_ics313% echo elephants | cat > file1.txt[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[Kdogs | cat > file2.txt
+uhx02:/home/15/knbagano/ics313/a1_ics313% echo birds | cat > file3.txt
+uhx02:/home/15/knbagano/ics313/a1_ics313% ls -l
+total 12
+-rw-r--r--. 1 knbagano uh 10 Aug 23 23:16 file1.txt
+-rw-r--r--. 1 knbagano uh  5 Aug 23 23:17 file2.txt
+-rw-r--r--. 1 knbagano uh  6 Aug 23 23:17 file3.txt
+-rw-r--r--. 1 knbagano uh  0 Aug 23 23:14 typescript
+uhx02:/home/15/knbagano/ics313/a1_ics313% cat file1.txt file2.txt file3.txt
+elephants
+dogs
+birds
+uhx02:/home/15/knbagano/ics313/a1_ics313% cat file1.txt file2.txt file3.txt | [Kuhx02:/home/15/knbagano/ics313/a1_ics313% cat file1.txt file2.txt file3.txt | [Kuhx02:/home/15/knbagano/ics313/a1_ics313% cat file1.txt file2.txt file3.txt | [Kuhx02:/home/15/knbagano/ics313/a1_ics313% cat file1.txt file2.txt file3.txt | [Kuhx02:/home/15/knbagano/ics313/a1_ics313% cat file1.txt file2.txt file3.txt | [Kuhx02:/home/15/knbagano/ics313/a1_ics313% cat file1.txt file2.txt file3.txt | [Kuhx02:/home/15/knbagano/ics313/a1_ics313% cat file1.txt file2.txt file3.txt | [Kuhx02:/home/15/knbagano/ics313/a1_ics313% cat file1.txt file2.txt file3.txt | [Kuhx02:/home/15/knbagano/ics313/a1_ics313% cat file1.txt file2.txt file3.txt | [Kuhx02:/home/15/knbagano/ics313/a1_ics313% cat file1.txt file2.txt file3.txt | [Kuhx02:/home/15/knbagano/ics313/a1_ics313% cat file1.txt file2.txt file3.txt | [Kuhx02:/home/15/knbagano/ics313/a1_ics313% cat file1.txt file2.txt file3.txt | [Kuhx02:/home/15/knbagano/ics313/a1_ics313% cat file1.txt file2.txt file3.txt | [Kuhx02:/home/15/knbagano/ics313/a1_ics313% cat file1.txt file2.txt file3.txt | [Kuhx02:/home/15/knbagano/ics313/a1_ics313% cat file1.txt file2.txt file3.txt | [Kuhx02:/home/15/knbagano/ics313/a1_ics313% cat file1.txt file2.txt file3.txt | [Kuhx02:/home/15/knbagano/ics313/a1_ics313% cat file1.txt file2.txt file3.txt | [Kuhx02:/home/15/knbagano/ics313/a1_ics313% cat file1.txt file2.txt file3.txt | [Kuhx02:/home/15/knbagano/ics313/a1_ics313% cat file1.txt file2.txt file3.txt | [Kuhx02:/home/15/knbagano/ics313/a1_ics313% cat file1.txt file2.txt file3.txt | [Kuhx02:/home/15/knbagano/ics313/a1_ics313% cat file1.txt file2.txt file3.txt | sort
+birds
+dogs
+elephants
+uhx02:/home/15/knbagano/ics313/a1_ics313% echo "see that e[Kwe could print out and then sort our dataa[K [K, le ts consolidate itin[K[K into one file"
+see that we could print out and then sort our data, lets consolidate it into one file
+uhx02:/home/15/knbagano/ics313/a1_ics313% echo "see that we could print out and then sort our data, letts consolidate it into one file"[A[C[C[C[C[C[C[C[C[C[Ccat file1.txt file2.txt file3.txt | sort[K
+[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C | cat > combind[KedFil e.txt
+uhx02:/home/15/knbagano/ics313/a1_ics313% rm f*.txt
+uhx02:/home/15/knbagano/ics313/a1_ics313% ls -l
+total 4
+-rw-r--r--. 1 knbagano uh 21 Aug 23 23:19 combinedFile.txt
+-rw-r--r--. 1 knbagano uh  0 Aug 23 23:14 typescript
+uhx02:/home/15/knbagano/ics313/a1_ics313% cat combinedFiled[K.txt
+birds
+dogs
+elephants
+uhx02:/home/15/knbagano/ics313/a1_ics313% echo "see that we put all 3 animals into one file and its mu ch cle[K[K[K[K[K[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[K
+[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cu ch cleaner nnow[K[Kp[K[Kow"[K. Lets make a copy of this..[K"[K[K combined file."
+see that we put all 3 animals into one file and its much cleaner now. Lets make a copy of this combined file.
+uhx02:/home/15/knbagano/ics313/a1_ics313% cp combinedFile.txt copy.txt
+uhx02:/home/15/knbagano/ics313/a1_ics313% ls
+combinedFile.txt  copy.txt  typescript
+uhx02:/home/15/knbagano/ics313/a1_ics313% cat copy.txt 
+birds
+dogs
+elephants
+uhx02:/home/15/knbagano/ics313/a1_ics313% echo "les[Kts make a new directory in our parent directory and  put another copy in the new directory."
+lets make a new directory in our parent directory and put another copy in the new directory.
+uhx02:/home/15/knbagano/ics313/a1_ics313% mkdir ../newDirect
+uhx02:/home/15/knbagano/ics313/a1_ics313% c [Kp copy.txt ../newDirect/newDirectCopy.txt
+uhx02:/home/15/knbagano/ics313/a1_ics313% echo "Lets go over and check it otu"
+Lets go over and check it otu
+uhx02:/home/15/knbagano/ics313/a1_ics313% cd../[K[K[K ../newDirect/
+uhx02:/home/15/knbagano/ics313/newDirect% ls
+newDirectCopy.txt
+uhx02:/home/15/knbagano/ics313/newDirect% cat newDirectCopy.txt 
+birds
+dogs
+elephants
+uhx02:/home/15/knbagano/ics313/newDirect% echo "lastly lets n[Krename this file and move it into the pare nt directory"
+lastly lets rename this file and move it into the parent directory
+uhx02:/home/15/knbagano/ics313/newDirect% mv newDirectCopy.txt renamedFile.txt
+uhx02:/home/15/knbagano/ics313/newDirect% ls
+renamedFile.txt
+uhx02:/home/15/knbagano/ics313/newDirect% mv renamedFile.txt ..
+uhx02:/home/15/knbagano/ics313/newDirect% ls
+uhx02:/home/15/knbagano/ics313/newDirect% cd ..
+uhx02:/home/15/knbagano/ics313% ls-l
+bash: ls-l: command not found
+uhx02:/home/15/knbagano/ics313% ls -l
+total 4
+drwxr-xr-x. 2 knbagano uh 100 Aug 23 23:21 [0m[01;34ma1_ics313[0m
+drwxr-xr-x. 2 knbagano uh   6 Aug 23 23:23 [01;34mnewDirect[0m
+-rw-r--r--. 1 knbagano uh  21 Aug 23 23:22 renamedFile.txt
+uhx02:/home/15/knbagano/ics313% cat renamedFile.txt 
+birds
+dogs
+elephants
+uhx02:/home/15/knbagano/ics313% exit
+exit
+
+Script done on Wed 23 Aug 2017 11:23:40 PM HST

@@ -1,0 +1,4 @@
+;;;;This file contains my oath to abide by the rules in the syllabus and
+;;;;the ACM Code of Ethics for assignment 1.
+
+I, Kalen Bagano, have read the syllabus and the ACM Code of Ethics and I understand them and agree to abide by them.
