@@ -1,0 +1,61 @@
+tests passed
+
+top([is, it, true, that, mark, hamill, acts, in, star, wars, iv]).
+	true
+top([who, acts, in, star, wars, iv]).
+
+top([did, mark, hamill, play, spock]).
+	false
+top([did, leonard, nimoy, play, spock]).
+	true
+top([did, zachary, quinto, play, spock]).
+	true
+top([did, mark, hamill, play, luke, skywalker]).
+	true
+top([did, leonard, nimoy, play, luke, skywalker]).
+	false
+top([did, zachary, quinto, play, luke, skywalker]).
+	false
+top([did, zachary, quinto, play, spock, and, mark, hamill, play, luke, skywalker]).
+	true		
+top([did, mark, hamill, play, spock, in, star, trek]).
+	false
+top([did, zachary, quinto, play, spock, in, star, trek]).
+	true
+top([is, it, true, that, william, shatner, is, an, actor]).
+	true
+top([is, it, true, that, george, lucas, is, an, director]).
+	true
+top([is, it, true, that, jj, abrams, is, an, director]).
+	true
+top([is, it, true, that, william, shatner, is, an, director]).
+	true	
+top([is, it, true, that, william, shatner, is, an, actor, and, mark, hamill, is, a, director]).
+	false
+top([is, it, true, that, william, shatner, is, an, actor, and, jj, abrams, is, a, director]).
+	true
+top([mark, hamill, plays, luke, skywlker, right]).
+	true
+top([mark, hamill, plays, spock, right]).
+	false
+top([did, george, lucas, star, wars, iv]).
+	true
+top([did, william, shatner, direct, star, wars, iv]).
+	false
+top([who,is,the,actor,for,kirk]).
+
+top([who,is,the,actor,for,spock]).
+
+top([who,is,the,director,for, star, trek]).
+
+top([who,is,the,director,for, star, wars, iv]).
+
+top([mark, hamill, plays, luke, skywalker, and, leonard, nimoy, plays, spock, right]).
+
+top([mark, hamill, plays, luke, skywalker, and, leonard, nimoy, plays, spock, and, eric, bana, plays, nero, right]).
+
+to be passed
+
+
+
+
